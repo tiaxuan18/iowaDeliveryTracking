@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Open Transfers</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-list-header>Deliveries</ion-list-header>
+    <ion-item  *ngFor="let trans of transfers" (click)="itemTapped(trans)">
+        {{trans.recipient_company_name__c}}
+        {{trans.name}}
+        {{trans.driver_name__c}}
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Returns</ion-list-header>
+    <button ion-item  *ngFor="let ret of returns" (click)="itemTapped(ret)">
+        {{ret.recipient_company_name__c}}
+        {{ret.name}}
+        {{ret.driver_name__c}}
+    </button>
+  </ion-list>
+  <div>
+    <button ion-button (click) ="goHome()">
+      Done
+    </button>
+  </div>
+</ion-content>

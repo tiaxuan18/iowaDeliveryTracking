@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>In Transit</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div #map id="map"></div>
+  <div>
+    <button ion-button (click) ="logAStop()">
+      Log a Stop
+    </button>
+     <button ion-button (click) ="transferOwnership()">
+      Transfer Ownership
+    </button>
+     <button ion-button (click) ="delivered()">
+      Delivered
+    </button>
+  </div>
+</ion-content>

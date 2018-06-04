@@ -23,7 +23,8 @@ export class TransfersPage {
               private storage: Storage,
               public oppoService : OpportunityService,
               public loading: LoadingService) {
-
+    this.transfers = [];
+    this.returns = [];
     this.loading.show();
     oppoService.getTransfers()
       .then( data => {

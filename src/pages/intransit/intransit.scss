@@ -1,6 +1,20 @@
 page-intransit{
-	#map {
+	 .scroll {
+        height: 100%
+    }
+
+	 #map {
     	height: 60%;
   	}
+  	
+  	ion-card {
+            max-height: 200px;
+            overflow: scroll;
+            position: absolute;
+            z-index: 1;
+    }
+    .hide {
+      display: none;
+    }
 
 }

@@ -1,11 +1,22 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>In Transit</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding [class.hide]="!hasTransfer" > 
+  <ion-card>
+      <ion-card-content>
+          <div #directionsPanel></div>
+      </ion-card-content>
+  </ion-card>
   <div #map id="map"></div>
   <div>
+     <button ion-button (click) ="googleMaps()">
+      Launch Google Maps
+    </button>
     <button ion-button (click) ="logAStop()">
       Log a Stop
     </button>

@@ -9,7 +9,22 @@
 <ion-content>
   <ion-list>
     <ion-item  *ngFor="let item of items" (click)="itemTapped(item)">
-        {{item.name}}
+        Recipient : {{ item.name }} <br>
+        {{ item.receiving_street_address__c }}
+        {{ item.receiving_city__c }},
+        {{ item.receiving_state__c }},
+        {{ item.receiving_zip_code__c }} <br>
+        Status : {{ item.status__c }} <br>
+        Type : {{ item.record_type_name__c }} <br>
+        Transfer Type : {{ item.transfer_type__c }} <br>
     </ion-item>
   </ion-list>
+  <ion-label *ngIf="items.length == 0">
+      Nothing on your itinerary
+  </ion-label>
+  <div>
+    <button ion-button (click) ="addTransfers()">
+      Add More Transfers
+    </button>
+  </div>
 </ion-content>

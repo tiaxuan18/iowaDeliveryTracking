@@ -23,6 +23,7 @@
     "@ionic-native/core": "4.7.0",
     "@ionic-native/geolocation": "^4.7.0",
     "@ionic-native/http": "^4.7.0",
+    "@ionic-native/launch-navigator": "^4.7.0",
     "@ionic-native/splash-screen": "4.7.0",
     "@ionic-native/sqlite": "^4.7.0",
     "@ionic-native/status-bar": "4.7.0",
@@ -31,8 +32,10 @@
     "angular2-uuid": "^1.1.1",
     "cordova-android": "7.0.0",
     "cordova-ios": "4.5.4",
+    "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
@@ -46,6 +49,7 @@
     "odata-v4-ng": "^1.0.4",
     "rxjs": "5.5.10",
     "sw-toolbox": "3.6.0",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.0",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -65,11 +69,14 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+      }
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

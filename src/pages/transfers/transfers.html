@@ -10,19 +10,25 @@
   <ion-list>
     <ion-list-header>Deliveries</ion-list-header>
     <ion-item  *ngFor="let trans of transfers" (click)="itemTapped(trans)">
-        {{trans.recipient_company_name__c}}
-        {{trans.name}}
-        {{trans.driver_name__c}}
+        Company Name: {{trans.recipient_company_name__c}} <br>
+        Transfer ID : {{trans.name}} <br>
+        Driver Name: {{trans.driver_name__c}} <br>
     </ion-item>
   </ion-list>
+  <ion-label *ngIf="transfers.length == 0">
+      No Transfers Available
+  </ion-label>
   <ion-list>
     <ion-list-header>Returns</ion-list-header>
     <button ion-item  *ngFor="let ret of returns" (click)="itemTapped(ret)">
-        {{ret.recipient_company_name__c}}
-        {{ret.name}}
-        {{ret.driver_name__c}}
+        Company Name: {{ret.recipient_company_name__c}} <br>
+        Return ID: {{ret.name}} <br>
+        Driver Name: {{ret.driver_name__c}} <br>
     </button>
   </ion-list>
+  <ion-label *ngIf="returns.length == 0">
+      No Returns Available
+  </ion-label>
   <div>
     <button ion-button (click) ="goHome()">
       Done

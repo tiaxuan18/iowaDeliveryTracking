@@ -3,9 +3,10 @@ import { NavController, ToastController, LoadingController } from 'ionic-angular
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
-import { EmployeeService } from '../../providers/employee';
-import { HomePage } from '../home/home';
 import { LoadingService } from '../../providers/loading';
+import { EmployeeService } from '../../providers/employee';
+
+import { HomePage } from '../home/home';
 
 
 @Component({

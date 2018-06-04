@@ -2,12 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { TransfersPage } from '../pages/transfers/transfers';
 import { ItineraryPage } from '../pages/itinerary/itinerary';
 import { InTransitPage } from '../pages/intransit/intransit';
+import { LogoutPage } from '../pages/logout/logout';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +24,8 @@ export class MyApp {
 
   constructor(public platform: Platform, 
               public statusBar: StatusBar, 
-              public splashScreen: SplashScreen) {
+              public splashScreen: SplashScreen,
+              private storage: Storage) {
 
     this.initializeApp();
 
@@ -32,8 +35,16 @@ export class MyApp {
       { title: 'Pick Up', component: TransfersPage },
       { title: 'My Itinerary', component: ItineraryPage },
       { title: 'In Transit', component: InTransitPage },
-      { title: 'Log Out', component: LoginPage }
+      { title: 'Log Out', component: LogoutPage }
     ];
+
+    this.storage.get('user').then((u) => {
+      if (u){
+        this.rootPage = HomePage;
+      } else {
+        this.rootPage = LoginPage;
+      }
+    });
 
   }
 

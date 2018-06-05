@@ -17,7 +17,7 @@ declare var google;
   templateUrl: 'itinerary.html'
 })
 export class ItineraryPage {
-  items: Array<any>;
+  data: any;
   user: any;
   directionMatrixService = new google.maps.DistanceMatrixService();
 
@@ -31,21 +31,15 @@ export class ItineraryPage {
               private transferGPS : TransferGPSService,
               private geolocation: Geolocation) {
 
-    this.items = [];
+    this.data = {transfers:[], returns:[]};
     this.loading.show();
     this.storage.get('user').then((user) => {
       this.user = user;
       oppoService.getItineraries(user.sfid)
         .then( data => {
           this.loading.hide();
-          let res = <any>{};
-          res = data;
-          this.storage.set('itinerary', res.data);
-          if (res.data instanceof Array) {
-            this.items = res.data;
-          } else{
-            this.items.push(res.data);
-          }
+          this.storage.set('itinerary', data);
+          this.data = data
         })
         .catch( errorReq => {
           this.loading.hide();

@@ -14,8 +14,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'transfers.html'
 })
 export class TransfersPage {
-  transfers: any;
-  returns: any;
+  data: any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -23,36 +22,14 @@ export class TransfersPage {
               private storage: Storage,
               public oppoService : OpportunityService,
               public loading: LoadingService) {
-    this.transfers = [];
-    this.returns = [];
+    this.data = {transfers:[], returns:[]};
     this.loading.show();
     oppoService.getTransfers()
       .then( data => {
+        this.loading.hide();
+        this.storage.set('transfers', data);
+        this.data = data;
 
-        let res = <any>{};
-        res = data;
-        this.storage.set('transfers', res.data);
-        this.transfers = res.data;
-
-        oppoService.getReturns()
-        .then( data => {
-          this.loading.hide();
-          let res = <any>{};
-          res = data;
-          this.storage.set('returns', res.data);
-          this.returns = res.data;
-        })
-        .catch( errorReq => {
-          this.loading.hide(); 
-          var errorObj  = JSON.parse(errorReq._body);
-          if (errorObj.message){
-            let t = this.toast.create({ message:errorObj.message, 
-                                duration: 5000, 
-                                position: 'top',
-                                showCloseButton: true});
-            t.present();
-          }
-        });
       })
       .catch( errorReq => {
         this.loading.hide();
@@ -65,8 +42,6 @@ export class TransfersPage {
           t.present();
         }
       });
-
-    
   }
 
   itemTapped(item) {

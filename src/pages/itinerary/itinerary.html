@@ -8,18 +8,41 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item  *ngFor="let item of items" (click)="itemTapped(item)">
-        Recipient : {{ item.name }} <br>
-        {{ item.receiving_street_address__c }}
-        {{ item.receiving_city__c }},
-        {{ item.receiving_state__c }},
-        {{ item.receiving_zip_code__c }} <br>
-        Status : {{ item.status__c }} <br>
-        Type : {{ item.record_type_name__c }} <br>
-        Transfer Type : {{ item.transfer_type__c }} <br>
+    <ion-list-header>Deliveries</ion-list-header>
+    <ion-item  *ngFor="let trans of data.transfers" (click)="itemTapped(trans)">
+        Recipient : {{ trans.name }} <br>
+        {{ trans.receiving_street_address__c }}
+        {{ trans.receiving_city__c }},
+        {{ trans.receiving_state__c }},
+        {{ trans.receiving_zip_code__c }} <br>
+        Status : {{ trans.status__c }} <br>
+        Type : {{ trans.record_type_name__c }} <br>
+        Transfer Type : {{ trans.transfer_type__c }} <br>
     </ion-item>
+    
   </ion-list>
-  <ion-label *ngIf="items.length == 0">
+  <ion-label *ngIf="data.transfers.length == 0">
+      No Deliveries on your itinerary
+  </ion-label>
+  <ion-list>
+    <ion-list-header>Returns</ion-list-header>
+    <ion-item  *ngFor="let ret of data.returns" (click)="itemTapped(ret)">
+        Recipient : {{ ret.name }} <br>
+        {{ ret.receiving_street_address__c }}
+        {{ ret.receiving_city__c }},
+        {{ ret.receiving_state__c }},
+        {{ ret.receiving_zip_code__c }} <br>
+        Status : {{ ret.status__c }} <br>
+        Type : {{ ret.record_type_name__c }} <br>
+        Transfer Type : {{ ret.transfer_type__c }} <br>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="primary">
+          Got Package
+      </button>
+    </ion-item-options>
+  </ion-list>
+  <ion-label *ngIf="data.returns.length == 0">
       Nothing on your itinerary
   </ion-label>
   <div>

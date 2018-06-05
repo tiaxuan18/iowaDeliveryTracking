@@ -31,20 +31,6 @@ export class OpportunityService {
         });
     }
 
-    getReturns() {
-        return new Promise( (resolve, reject) => {
-            this.helper.getTokenHeader().then(header => {
-                this.http.get(this.opportunityURL + 'returns', header)
-                .subscribe(
-                    data => {resolve(data.json())},
-                    err => { 
-                        reject(err);
-                    }
-                );
-            });
-        });
-    }
-
     getItineraries(userId) {
         return new Promise( (resolve, reject) => {
             this.helper.getTokenHeader().then(header => {

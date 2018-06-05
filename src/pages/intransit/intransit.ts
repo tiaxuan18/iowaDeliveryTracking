@@ -49,7 +49,7 @@ export class InTransitPage {
 	        	.then( data => {
 	          		let res = <any>{};
 			        res = data;
-			        if (res.data.length == 1){
+			        if (res.data.length > 0){
 			        	this.hasTransfer = true;
 			        	this.item = res.data[0];
 			        	this.storage.set('intransit', res.data[0]);

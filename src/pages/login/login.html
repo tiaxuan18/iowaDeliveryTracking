@@ -7,17 +7,31 @@
     </ion-row>
   </ion-grid>
   <form [formGroup]="loginFrm" (ngSubmit)="onLogin(loginFrm.value)" padding>
-    <ion-label *ngIf="hasError === true">{{errorMsg}}</ion-label>
     <ion-label floating>Email</ion-label>
     <ion-item>
       <ion-input type="email" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item no-lines *ngIf="loginFrm.get('username').hasError('required') && loginFrm.get('username').touched">
+        <div *ngIf="loginFrm.get('username').hasError('required')">
+          Please input your email
+        </div>
+    </ion-item>
+    <ion-item no-lines *ngIf="loginFrm.get('username').hasError('pattern') && loginFrm.get('username').touched">
+        <div *ngIf="loginFrm.get('username').hasError('pattern')">
+          Please a valid email
+        </div>
     </ion-item>
     <ion-label floating>Password</ion-label>
     <ion-item>
       <ion-input type="password" formControlName="password" #password></ion-input>
     </ion-item>
+    <ion-item no-lines *ngIf="(loginFrm.get('password').hasError('required') && loginFrm.get('password').touched)">
+        <div class="error" *ngIf="loginFrm.get('password').hasError('required') && loginFrm.get('password').touched">
+          Please input your password
+        </div>
+    </ion-item>
     <div padding-top>
-      <button ion-button block [disabled]="!loginFrm.valid" type="submit">
+      <button ion-button block [disabled]="loginFrm.invalid" type="submit">
         Login
       </button>
     </div>
@@ -25,9 +39,9 @@
   <ion-grid>
     <ion-row>
       <ion-col col-auto>
-
-        <h3 ion-text color="light">Forget Password?</h3>
-
+        <h3 ion-text color="light">
+          <a (click)="onForgotPassword()">Forget Password?</a>
+      </h3>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,6 +1,6 @@
 import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 
 import { HelperService } from './helper';
 import * as ServiceSettings from './config';
@@ -8,19 +8,17 @@ import * as ServiceSettings from './config';
 
 @Injectable()
 export class OpportunityService {
-	http: any;
 	opportunityURL:any;
 
     constructor(private httpService: Http,
                 private helper: HelperService) {
-     	this.http = httpService;
     	this.opportunityURL = ServiceSettings.SERVER_URL + '/api/opportunity/';
     }
 
-    getTransfers() {
+    getTransfers(employer) {
         return new Promise( (resolve, reject) => {
             this.helper.getTokenHeader().then(header => {
-                this.http.get(this.opportunityURL + 'transfers', header)
+                this.httpService.get(this.opportunityURL + 'transfers/' + employer, header)
                 .subscribe(
                     data => {resolve(data.json())},
                     err => { 
@@ -34,7 +32,7 @@ export class OpportunityService {
     getItineraries(userId) {
         return new Promise( (resolve, reject) => {
             this.helper.getTokenHeader().then(header => {
-                this.http.get(this.opportunityURL + 'itineraries/' + userId, header)
+                this.httpService.get(this.opportunityURL + 'itineraries/' + userId, header)
                 .subscribe(
                     data => {resolve(data.json())},
                     err => { 
@@ -48,7 +46,7 @@ export class OpportunityService {
     getInTransit(userId) {
         return new Promise( (resolve, reject) => {
             this.helper.getTokenHeader().then(header => {
-                this.http.get(this.opportunityURL + 'intransit/' + userId, header)
+                this.httpService.get(this.opportunityURL + 'intransit/' + userId, header)
                 .subscribe(
                     data => {resolve(data.json())},
                     err => { 
@@ -62,7 +60,7 @@ export class OpportunityService {
     updateOpportunity(oppoId, jsonBody) {
         return new Promise( (resolve, reject) => {
             this.helper.getTokenHeader().then(header => {
-                this.http.post(this.opportunityURL + oppoId, jsonBody, header)
+                this.httpService.post(this.opportunityURL + oppoId, jsonBody, header)
                 .subscribe(
                     data => {resolve(data.json())},
                     err => { 

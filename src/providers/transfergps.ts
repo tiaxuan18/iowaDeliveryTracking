@@ -1,18 +1,16 @@
 import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HelperService } from './helper';
-import { LoadingService } from './loading';
 
 import * as ServiceSettings from './config';
 
 @Injectable()
 export class TransferGPSService {
-	http: any;
 	transferGPSURL:any;
     interval: any;
     gpsData : any;
@@ -21,9 +19,7 @@ export class TransferGPSService {
                 private storage: Storage,
                 private helper: HelperService,
                 private toast : ToastController,
-                private loading: LoadingService,
                 private geolocation: Geolocation) {
-     	this.http = httpService;
     	this.transferGPSURL = ServiceSettings.SERVER_URL + '/api/transfergps';
     	
     }
@@ -32,7 +28,7 @@ export class TransferGPSService {
     createTransferGPS(jsonBody) {
         return new Promise( (resolve, reject) => {
             this.helper.getTokenHeader().then(header => {
-                this.http.post(this.transferGPSURL, jsonBody, header)
+                this.httpService.post(this.transferGPSURL, jsonBody, header)
                 .subscribe(
                     data => {resolve(data.json())},
                     err => { 

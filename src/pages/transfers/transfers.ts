@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { OpportunityService } from '../../providers/opportunity';
@@ -24,24 +24,26 @@ export class TransfersPage {
               public loading: LoadingService) {
     this.data = {transfers:[], returns:[]};
     this.loading.show();
-    oppoService.getTransfers()
-      .then( data => {
-        this.loading.hide();
-        this.storage.set('transfers', data);
-        this.data = data;
+    this.storage.get('user').then((user) => {
+      oppoService.getTransfers(user.employer__c)
+        .then( data => {
+          this.loading.hide();
+          this.storage.set('transfers', data);
+          this.data = data;
 
-      })
-      .catch( errorReq => {
-        this.loading.hide();
-        var errorObj  = JSON.parse(errorReq._body);
-        if (errorObj.message){
-          let t = this.toast.create({ message:errorObj.message, 
-                              duration: 5000, 
-                              position: 'top',
-                              showCloseButton: true});
-          t.present();
-        }
-      });
+        })
+        .catch( errorReq => {
+          this.loading.hide();
+          var errorObj  = JSON.parse(errorReq._body);
+          if (errorObj.message){
+            let t = this.toast.create({ message:errorObj.message, 
+                                duration: 5000, 
+                                position: 'top',
+                                showCloseButton: true});
+            t.present();
+          }
+        });
+    });
   }
 
   itemTapped(item) {

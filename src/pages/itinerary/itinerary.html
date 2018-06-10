@@ -9,7 +9,7 @@
 <ion-content>
   <ion-list>
     <ion-list-header>Deliveries</ion-list-header>
-    <ion-item  *ngFor="let trans of data.transfers" (click)="itemTapped(trans)">
+    <ion-item  *ngFor="let trans of data.transfers" (click)="itemTapped(trans, false)">
         Recipient : {{ trans.name }} <br>
         {{ trans.receiving_street_address__c }}
         {{ trans.receiving_city__c }},
@@ -26,22 +26,29 @@
   </ion-label>
   <ion-list>
     <ion-list-header>Returns</ion-list-header>
-    <ion-item  *ngFor="let ret of data.returns" (click)="itemTapped(ret)">
-        Recipient : {{ ret.name }} <br>
-        {{ ret.receiving_street_address__c }}
-        {{ ret.receiving_city__c }},
-        {{ ret.receiving_state__c }},
-        {{ ret.receiving_zip_code__c }} <br>
-        Status : {{ ret.status__c }} <br>
-        Type : {{ ret.record_type_name__c }} <br>
-        Transfer Type : {{ ret.transfer_type__c }} <br>
-    </ion-item>
-    <ion-item-options side="left">
-      <button ion-button color="primary">
-          Got Package
-      </button>
-    </ion-item-options>
+    <ion-item-sliding *ngFor="let ret of data.returns"> 
+      <ion-item>
+          Recipient : {{ ret.name }} <br>
+          {{ ret.receiving_street_address__c }}
+          {{ ret.receiving_city__c }},
+          {{ ret.receiving_state__c }},
+          {{ ret.receiving_zip_code__c }} <br>
+          Status : {{ ret.status__c }} <br>
+          Type : {{ ret.record_type_name__c }} <br>
+          Transfer Type : {{ ret.transfer_type__c }} <br>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="addReturn(ret)" *ngIf="!ret.addedToReturn">
+            Got Package
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
+  <div *ngIf="data.returns.length > 0">
+    <button ion-button (click) ="transferReturns()" >
+      Transfer Returns
+    </button>
+  </div>
   <ion-label *ngIf="data.returns.length == 0">
       Nothing on your itinerary
   </ion-label>

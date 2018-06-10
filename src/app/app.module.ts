@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { IonicStorageModule } from '@ionic/storage'
 import { Geolocation } from '@ionic-native/geolocation';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';

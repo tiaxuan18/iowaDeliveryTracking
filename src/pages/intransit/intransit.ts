@@ -27,6 +27,7 @@ export class InTransitPage {
   	directionsDisplay = new google.maps.DirectionsRenderer;
   	item : any;
   	user : any;
+  	returns: any;
   	destination : any;
   	hasTransfer: any;
 
@@ -52,6 +53,7 @@ export class InTransitPage {
 			        if (res.data.length > 0){
 			        	this.hasTransfer = true;
 			        	this.item = res.data[0];
+			        	this.returns = res.data;
 			        	this.storage.set('intransit', res.data[0]);
 			        	this.loadMap();
 			        } else {
@@ -115,7 +117,7 @@ export class InTransitPage {
 
   	googleMaps(){
 		let options: LaunchNavigatorOptions = {
-		  app: this.launchNavigator.APP.UBER
+		  app: this.launchNavigator.APP.GOOGLE_MAPS
 		};
 
 		this.launchNavigator.navigate(this.destination, options)
@@ -147,24 +149,27 @@ export class InTransitPage {
    		this.loading.show();
 	    var body = { colNames : ['arrival_time__c', 'status__c'],
 	                 vals : [Date.now, 'Arrived']}
-
-	    this.oppoService.updateOpportunity(this.item.sfid, body)
-	        .then( data => {
-	        	this.transferGPS.stopGPSTracking();
-	          	this.loading.hide();  
-	          	this.navCtrl.setRoot(InTransitPage, {item: this.item});  
-	        })
-	        .catch( errorReq => {
-	            this.loading.hide();  
-	            var errorObj  = JSON.parse(errorReq._body);
-	            if (errorObj.message){
-	              let t = this.toast.create({ message:errorObj.message, 
-	                                  duration: 5000, 
-	                                  position: 'top',
-	                                  showCloseButton: true});
-	              t.present();
-            }
-        });
+	     for(let i=0;i<this.returns.length;i++){
+         	this.oppoService.updateOpportunity(this.returns[i].sfid, body)
+		        .then( data => {
+		        	if (i == this.returns.length -1){
+                        this.transferGPS.stopGPSTracking();
+		          		this.loading.hide();  
+		          		this.navCtrl.setRoot(InTransitPage, {item: this.item});  
+                  	}
+		        })
+		        .catch( errorReq => {
+		            this.loading.hide();  
+		            var errorObj  = JSON.parse(errorReq._body);
+		            if (errorObj.message){
+		              let t = this.toast.create({ message:errorObj.message, 
+		                                  duration: 5000, 
+		                                  position: 'top',
+		                                  showCloseButton: true});
+		              t.present();
+	            	}
+	           	});
+        } 
    		this.navCtrl.setRoot(ItineraryPage); 
 	}
 

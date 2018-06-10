@@ -7,11 +7,7 @@ import { LoadingService } from '../../providers/loading';
 import { TransferLogService } from '../../providers/transferlog';
 import { HelperService } from '../../providers/helper';
 
-
-import { HomePage } from '../home/home';
 import { InTransitPage } from '../intransit/intransit';
-
-
 
 @Component({
   selector: 'page-logastop',

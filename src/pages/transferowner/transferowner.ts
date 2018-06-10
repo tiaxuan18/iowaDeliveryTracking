@@ -39,6 +39,7 @@ export class TransferOwnerPage {
 
   transferItem(){
     this.loading.show();
+    debugger;
     var body = { colNames : ['transfer_ownership_reason__c'],
                    vals : [this.transOwnerFrm.value.reason]}
     this.transferGPS.stopGPSTracking();

@@ -1,23 +1,35 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <form [formGroup]="loginFrm" (ngSubmit)="onLogin(loginFrm.value)">
-      <ion-label *ngIf="hasError === true">{{errorMsg}}</ion-label>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="email" formControlName="username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" formControlName="password" #password></ion-input>
-      </ion-item>
-      <div>
-        <button ion-button [disabled]="!loginFrm.valid" style="margin-top: 20px;" type="submit">
-          Login
-        </button>
-      </div>
+<ion-content padding class="page-login text-center">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto>
+        <ion-img width="200" height="125" src="../assets/img/idph-logo.png"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form [formGroup]="loginFrm" (ngSubmit)="onLogin(loginFrm.value)" padding>
+    <ion-label *ngIf="hasError === true">{{errorMsg}}</ion-label>
+    <ion-label floating>Email</ion-label>
+    <ion-item>
+      <ion-input type="email" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-item>
+      <ion-input type="password" formControlName="password" #password></ion-input>
+    </ion-item>
+    <div padding-top>
+      <button ion-button block [disabled]="!loginFrm.valid" type="submit">
+        Login
+      </button>
+    </div>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto>
+
+        <h3 ion-text color="light">Forget Password?</h3>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

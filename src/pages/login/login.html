@@ -11,25 +11,25 @@
     <ion-item>
       <ion-input type="email" formControlName="username"></ion-input>
     </ion-item>
-    <ion-item no-lines *ngIf="loginFrm.get('username').hasError('required') && loginFrm.get('username').touched">
-        <div *ngIf="loginFrm.get('username').hasError('required')">
+    <div no-lines *ngIf="loginFrm.get('username').hasError('required') && loginFrm.get('username').touched">
+        <div class="val-error" *ngIf="loginFrm.get('username').hasError('required')">
           Please input your email
         </div>
-    </ion-item>
-    <ion-item no-lines *ngIf="loginFrm.get('username').hasError('pattern') && loginFrm.get('username').touched">
-        <div *ngIf="loginFrm.get('username').hasError('pattern')">
+    </div>
+    <div no-lines *ngIf="loginFrm.get('username').hasError('pattern') && loginFrm.get('username').touched">
+        <div class="val-error" *ngIf="loginFrm.get('username').hasError('pattern')">
           Please a valid email
         </div>
-    </ion-item>
+    </div>
     <ion-label floating>Password</ion-label>
     <ion-item>
       <ion-input type="password" formControlName="password" #password></ion-input>
     </ion-item>
-    <ion-item no-lines *ngIf="(loginFrm.get('password').hasError('required') && loginFrm.get('password').touched)">
-        <div class="error" *ngIf="loginFrm.get('password').hasError('required') && loginFrm.get('password').touched">
+    <div no-lines *ngIf="(loginFrm.get('password').hasError('required') && loginFrm.get('password').touched)">
+        <div class="val-error" *ngIf="loginFrm.get('password').hasError('required') && loginFrm.get('password').touched">
           Please input your password
         </div>
-    </ion-item>
+    </div>
     <div padding-top>
       <button ion-button block [disabled]="loginFrm.invalid" type="submit">
         Login

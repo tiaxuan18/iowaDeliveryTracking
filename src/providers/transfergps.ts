@@ -71,7 +71,7 @@ export class TransferGPSService {
          this.storage.get('intervalID').then((iId) => {
             clearInterval(iId);
              this.storage.get('gpsData').then((gps) => {
-                if (gps.length > 0){
+                if (gps != null && gps.length > 0){
                     var body = { colNames : ['latitude__c', 'longitude__c', 'driver__c', 'createddate'],
                                  vals : gps};
                     this.createTransferGPS(body).then( data => {

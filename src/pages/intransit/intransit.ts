@@ -27,7 +27,7 @@ export class InTransitPage {
   	directionsDisplay = new google.maps.DirectionsRenderer;
   	item : any;
   	user : any;
-  	returns: any;
+  	items: any;
   	destination : any;
   	hasTransfer: any;
 
@@ -53,8 +53,8 @@ export class InTransitPage {
 			        if (res.data.length > 0){
 			        	this.hasTransfer = true;
 			        	this.item = res.data[0];
-			        	this.returns = res.data;
-			        	this.storage.set('intransit', res.data[0]);
+			        	this.items = res.data;
+			        	this.storage.set('intransit', res.data);
 			        	this.loadMap();
 			        } else {
 			        	this.loading.hide();
@@ -135,24 +135,24 @@ export class InTransitPage {
 
 	logAStop(){
 		this.navCtrl.push(LogAStopPage, {
-	      item: this.item
+	      items: this.items
 	    }); 
    	}
 
    	transferOwnership(){
    		this.navCtrl.push(TransferOwnerPage, {
-	      item: this.item
+	      items: this.items
 	    }); 
    	}
 
    	delivered(){
    		this.loading.show();
 	    var body = { colNames : ['arrival_time__c', 'status__c'],
-	                 vals : [Date.now, 'Arrived']}
-	     for(let i=0;i<this.returns.length;i++){
-         	this.oppoService.updateOpportunity(this.returns[i].sfid, body)
+	                 vals : [Date.now, 'Completed']}
+	    for(let i=0;i<this.items.length;i++){
+         	this.oppoService.updateOpportunity(this.items[i].sfid, body)
 		        .then( data => {
-		        	if (i == this.returns.length -1){
+		        	if (i == (this.items.length -1)){
                         this.transferGPS.stopGPSTracking();
 		          		this.loading.hide();  
 		          		this.navCtrl.setRoot(InTransitPage, {item: this.item});  

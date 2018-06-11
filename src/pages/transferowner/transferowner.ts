@@ -18,7 +18,7 @@ import { HelperService } from '../../providers/helper';
 export class TransferOwnerPage {
 
   transOwnerFrm : FormGroup;
-  transitItem : any;
+  transitItems : any;
 
   constructor(public navCtrl: NavController, 
               private formBuilder: FormBuilder,
@@ -33,63 +33,71 @@ export class TransferOwnerPage {
     	reason: ['', Validators.required]
     });
     this.storage.get('intransit').then((tItem) => {
-      this.transitItem = tItem;
+      this.transitItems = tItem;
     });
   }
 
   transferItem(){
     this.loading.show();
-    debugger;
-    var body = { colNames : ['transfer_ownership_reason__c'],
-                   vals : [this.transOwnerFrm.value.reason]}
-    this.transferGPS.stopGPSTracking();
-    this.transfer.createTransferOwner(body)
-      .then( data => {
-          this.transferOpportunity();
-      })
-      .catch( errorReq => {
-          this.loading.hide();  
-          var errorObj  = JSON.parse(errorReq._body);
-          if (errorObj.message){
-            let t = this.toast.create({ message:errorObj.message, 
-                                duration: 5000, 
-                                position: 'top',
-                                showCloseButton: true});
-            t.present();
-          }  
-      });
+    for(let i=0;i<this.transitItems.length;i++){
+      var body = { colNames : ['transfer_ownership_reason__c',"transfer__c"],
+                     vals : [this.transOwnerFrm.value.reason, this.transitItems[i].sfid]}
+      if (i == (this.transitItems.length -1)){
+        this.transferGPS.stopGPSTracking();
+      }
+      this.transfer.createTransferOwner(body)
+        .then( data => {
+            this.transferOpportunity();
+        })
+        .catch( errorReq => {
+            this.loading.hide();  
+            var errorObj  = JSON.parse(errorReq._body);
+            if (errorObj.message){
+              let t = this.toast.create({ message:errorObj.message, 
+                                  duration: 5000, 
+                                  position: 'top',
+                                  showCloseButton: true});
+              t.present();
+            }  
+        });
+      }
       
 
   }
   	
   transferOpportunity(){
-    var bodyOppo = { colNames : ['arrival_time__c', 'status__c', 'driver__c'],
-                   vals : [this.helper.formatDate(new Date()), 'Pending', '']}
 
-    this.oppoService.updateOpportunity(this.transitItem.sfid, bodyOppo)
-          .then( data => {
-            this.loading.hide();
-            let t = this.toast.create({ message: 'The item has been put back in process', 
-                                        duration: 5000, 
-                                        position: 'top',
-                                        showCloseButton: true});
-            t.present(); 
-            this.storage.remove('intransit');
-            t.onDidDismiss(() => {
-               this.navCtrl.setRoot(HomePage);  
+    for(let i=0;i<this.transitItems.length;i++){
+      var bodyOppo = { colNames : ['arrival_time__c', 'status__c', 'driver__c'],
+                     vals : [this.helper.formatDate(new Date()), 'Pending', '']}
+
+      this.oppoService.updateOpportunity(this.transitItems[i].sfid, bodyOppo)
+            .then( data => {
+              if (i == (this.transitItems.length -1)){
+                this.loading.hide();
+                let t = this.toast.create({ message: 'The item has been put back in process', 
+                                            duration: 5000, 
+                                            position: 'top',
+                                            showCloseButton: true});
+                t.present(); 
+                this.storage.remove('intransit');
+                t.onDidDismiss(() => {
+                   this.navCtrl.setRoot(HomePage);  
+                });
+              }
+            })
+            .catch( errorReq => {
+                this.loading.hide();  
+                var errorObj  = JSON.parse(errorReq._body);
+                if (errorObj.message){
+                  let t = this.toast.create({ message:errorObj.message, 
+                                      duration: 5000, 
+                                      position: 'top',
+                                      showCloseButton: true});
+                  t.present();
+              }
             });
-          })
-          .catch( errorReq => {
-              this.loading.hide();  
-              var errorObj  = JSON.parse(errorReq._body);
-              if (errorObj.message){
-                let t = this.toast.create({ message:errorObj.message, 
-                                    duration: 5000, 
-                                    position: 'top',
-                                    showCloseButton: true});
-                t.present();
-            }
-          });
+     }
   }
   	
 }

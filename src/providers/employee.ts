@@ -22,6 +22,7 @@ export class EmployeeService {
                 email : email,
                 password : btoa(password)
             }
+            debugger;
             this.httpService.post(this.employeeURL, body)
             .subscribe(
                 data => {

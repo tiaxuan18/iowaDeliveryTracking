@@ -16,8 +16,8 @@ import { InTransitPage } from '../intransit/intransit';
 export class LogAStopPage {
 
   logastopFrm : FormGroup;
-  item : any;
-  transitItem : any;
+  items : any;
+  transitItems : any;
   stopBegan : Boolean;
   t : any;
 
@@ -34,14 +34,16 @@ export class LogAStopPage {
         description : ['', Validators.required]
     });
     this.loading.show();
-    this.storage.get('intransit').then((tItem) => {
-      this.transitItem = tItem;
-      this.storage.get('loggedastop').then((lasItem) => {
+    this.storage.get('intransit').then((tItems) => {
+      this.transitItems = tItems;
+      this.storage.get('loggedastop').then((lasItems) => {
         this.loading.hide();
-        if (lasItem){
-          this.item = lasItem;
-          this.logastopFrm.controls['reason'].setValue(lasItem.reason);
-          this.logastopFrm.controls['description'].setValue(lasItem.description);
+        if (lasItems){
+          this.items = lasItems;
+          for(let i=0;i<this.items.length;i++){
+            this.logastopFrm.controls['reason'].setValue(lasItems[i].reason);
+            this.logastopFrm.controls['description'].setValue(lasItems[i].description);
+          }
           this.stopBegan = true;
         } 
       });
@@ -51,26 +53,33 @@ export class LogAStopPage {
   
   beginStop(){
     this.loading.show();
-    var body = {  colNames : ["stop_reason__c", "stop_details__c", "begin_stop__c", "transfer__c"],
-                  vals : [this.logastopFrm.value.reason, this.logastopFrm.value.description, this.helper.formatDate(new Date()), this.transitItem.sfid]}
-
-    this.transfer.createLogAStop(body)
+    this.items = [];
+    for(let i=0;i<this.transitItems.length;i++){
+      var body = {  colNames : ["stop_reason__c", "stop_details__c", "begin_stop__c", "transfer__c"],
+                      vals : [this.logastopFrm.value.reason, this.logastopFrm.value.description, this.helper.formatDate(new Date()), this.transitItems[i].sfid]}
+      this.transfer.createLogAStop(body)
           .then( data => {
-            this.loading.hide(); 
-            let t = this.toast.create({ message: 'Stop Logged', 
-                                        duration: 5000, 
-                                        position: 'top',
-                                        showCloseButton: true});
-            t.present();
+            if (i == (this.transitItems.length -1)){
+              this.loading.hide(); 
+              let t = this.toast.create({ message: 'Stop Logged', 
+                                          duration: 5000, 
+                                          position: 'top',
+                                          showCloseButton: true});
+              t.present();
+            }
+
             let res = <any>{};
             res = data;
-            this.item = res.data;
-            this.item.reason = this.logastopFrm.value.reason;
-            this.item.description = this.logastopFrm.value.description;
-            this.storage.set('loggedastop', this.item);
+            this.items.push(res.data);
+            this.items[i].reason = this.logastopFrm.value.reason;
+            this.items[i].description = this.logastopFrm.value.description;
+            if (i == (this.transitItems.length -1)){
+              this.storage.set('loggedastop', this.items);
+            }
             
           })
           .catch( errorReq => {
+            debugger;
               this.loading.hide();  
               var errorObj  = JSON.parse(errorReq._body);
               if (errorObj.message){
@@ -80,41 +89,44 @@ export class LogAStopPage {
                                     showCloseButton: true});
                 t.present();
             }
-     });
+      });
+    }
   
   }
   	
   resume(){
     this.loading.show();
-    var body = {  colNames : ['finish_stop__c'],
-                  vals : [this.helper.formatDate(new Date())]}
+    for(let i=0;i<this.items.length;i++){
+      var body = {  colNames : ['finish_stop__c'],
+                    vals : [this.helper.formatDate(new Date())]}
+      this.transfer.updateTransferLog(this.items[i].id, body)
+            .then( data => {
+              if (i==(this.items.length-1)){
+                this.loading.hide(); 
+                let t = this.toast.create({ message: 'Resumed', 
+                                            duration: 5000, 
+                                            position: 'top',
+                                            showCloseButton: true});
+                t.present(); 
+                this.storage.remove('loggedastop');
+                t.onDidDismiss(() => {
+                   this.navCtrl.setRoot(InTransitPage, {items: this.transitItems});  
+                });
+              }
 
-
-    this.transfer.updateTransferLog(this.item.id, body)
-          .then( data => {
-            this.loading.hide(); 
-            let t = this.toast.create({ message: 'Resumed', 
-                                        duration: 5000, 
-                                        position: 'top',
-                                        showCloseButton: true});
-            t.present(); 
-            this.storage.remove('loggedastop');
-            t.onDidDismiss(() => {
-               this.navCtrl.setRoot(InTransitPage, {item: this.transitItem});  
-            });
-
-            
-          })
-          .catch( errorReq => {
-              this.loading.hide();  
-              var errorObj  = JSON.parse(errorReq._body);
-              if (errorObj.message){
-                let t = this.toast.create({ message:errorObj.message, 
-                                    duration: 5000, 
-                                    position: 'top',
-                                    showCloseButton: true});
-                t.present();
-            }
-     });
+              
+            })
+            .catch( errorReq => {
+                this.loading.hide();  
+                var errorObj  = JSON.parse(errorReq._body);
+                if (errorObj.message){
+                  let t = this.toast.create({ message:errorObj.message, 
+                                      duration: 5000, 
+                                      position: 'top',
+                                      showCloseButton: true});
+                  t.present();
+              }
+       });
+    }
   }
 }

@@ -3,11 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>My Itinerary</ion-title>
+     <ion-title text-center><img class="logo" width="auto" height="40" src="../assets/img/idph-logo.png" /></ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <ion-list>
+<ion-content padding>
+  <ion-header class="header-title">My Itinerary</ion-header>
+  <ion-list class="list-one">
     <ion-list-header>Deliveries</ion-list-header>
     <ion-item  *ngFor="let trans of data.transfers" (click)="itemTapped(trans, false)">
         Recipient : {{ trans.name }} <br>

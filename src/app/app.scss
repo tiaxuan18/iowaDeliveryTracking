@@ -34,7 +34,9 @@ img.logo {
   background-color: #e7ebf5;
   padding: 3px;
 }
-
+ion-menu .item-md{
+	color: #214d7c;
+}
 ion-app.md [padding-top] .scroll-content, ion-app.md [padding] .scroll-content {
   padding-top: 30px;
 }
@@ -52,6 +54,22 @@ border-top: 0px solid #fff;
 .button-md{
 	    height: 4.6rem;
 }
-ion-menu .item-md{
-	color: #214d7c;
+.btn-default{
+	background: #e2e5ee;
+    color: #214d7c;
+    width: calc(100% - 20px);
+    margin-left: 9px;
+
 }
+.button-md:hover:not(.disable-hover) {
+    background-color: #214d7c;
+    color: #e2e5ee;
+}
+.badge-md{
+    color: #fff;
+    border-radius: 11px;
+}
+.mb-1{
+	margin-bottom: 1rem;
+}
+

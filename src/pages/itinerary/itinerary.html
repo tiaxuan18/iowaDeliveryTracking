@@ -3,62 +3,75 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-     <ion-title text-center><img class="logo" width="auto" height="40" src="../assets/img/idph-logo.png" /></ion-title>
+    <ion-title text-center><img class="logo" width="auto" height="40" src="../assets/img/idph-logo.png" /></ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-header class="header-title">My Itinerary</ion-header>
   <ion-list class="list-one">
     <ion-list-header>Deliveries</ion-list-header>
-    <ion-item  *ngFor="let trans of data.transfers" (click)="itemTapped(trans, false)">
-        Recipient : {{ trans.name }} <br>
-        {{ trans.receiving_street_address__c }}
-        {{ trans.receiving_city__c }},
-        {{ trans.receiving_state__c }},
-        {{ trans.receiving_zip_code__c }} <br>
-        Status : {{ trans.status__c }} <br>
-        Type : {{ trans.record_type_name__c }} <br>
-        Transfer Type : {{ trans.transfer_type__c }} <br>
-    </ion-item>
-    
+    <ion-card *ngFor="let trans of data.transfers" (click)="itemTapped(trans, false)">
+      <ion-card-header>
+        <ion-badge class="bg-primary" item-start>1</ion-badge> &nbsp;<span class="card-label"> {{ trans.name }} </span>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="mb-1">
+          {{ trans.receiving_street_address__c }} {{ trans.receiving_city__c }}, {{ trans.receiving_state__c }}, {{ trans.receiving_zip_code__c }}
+        </div>
+        <ion-badge class="label-icon" item-end>Delivery</ion-badge>
+        <span class="card-label">Status:</span> {{ trans.status__c }}
+        <br>
+        <span class="card-label">Type:</span> {{ trans.record_type_name__c }}
+        <br>
+        <span class="card-label">Transfer Type:</span> {{ trans.transfer_type__c }}
+        <br>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
   <ion-label *ngIf="data.transfers.length == 0">
-      No Deliveries on your itinerary
+    No Deliveries on your itinerary
   </ion-label>
   <ion-list>
     <ion-list-header>Returns</ion-list-header>
-    <ion-item-sliding *ngFor="let ret of data.returns"> 
+    <ion-item-sliding *ngFor="let ret of data.returns">
       <ion-item>
-          Recipient : {{ ret.name }} <br>
-          {{ ret.receiving_street_address__c }}
-          {{ ret.receiving_city__c }},
-          {{ ret.receiving_state__c }},
-          {{ ret.receiving_zip_code__c }} <br>
-          Status : {{ ret.status__c }} <br>
-          Type : {{ ret.record_type_name__c }} <br>
-          Transfer Type : {{ ret.transfer_type__c }} <br>
+        <ion-card>
+          <ion-card-header class="returns-header">
+            <ion-badge class="bg-primary" item-start>1</ion-badge> &nbsp;<span class="card-label"> {{ ret.name }} </span>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="mb-1">
+              {{ ret.receiving_street_address__c }} {{ ret.receiving_city__c }}, {{ ret.receiving_state__c }}, {{ ret.receiving_zip_code__c }}
+            </div>
+            <span class="card-label">Status:</span> {{ ret.status__c }}
+            <br>
+            <span class="card-label">Type:</span> {{ ret.record_type_name__c }}
+            <br>
+            <span class="card-label">Transfer Type:</span> {{ ret.transfer_type__c }}
+            
+          </ion-card-content><ion-badge class="label-icon bg-primary" item-end>Return</ion-badge>
+        </ion-card>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="primary" (click)="addReturn(ret)" *ngIf="!ret.addedToReturn">
-            Got Package
+          Received Package
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
   <div *ngIf="data.returns.length > 0">
-    <button ion-button (click) ="transferReturns()" >
+    <button class="btn-default" block ion-button (click)="transferReturns()">
       Transfer Returns
     </button>
   </div>
   <ion-label *ngIf="data.returns.length == 0">
-      Nothing on your itinerary
+    Nothing on your itinerary
   </ion-label>
-
 </ion-content>
 <ion-footer padding>
-    <div>
-    <button block ion-button (click) ="addTransfers()">
-      Add More Transfers
+  <div>
+    <button block ion-button (click)="addTransfers()">
+      <ion-icon name="add-circle"></ion-icon> &nbsp; Add More Transfers
     </button>
   </div>
-  </ion-footer>
+</ion-footer>

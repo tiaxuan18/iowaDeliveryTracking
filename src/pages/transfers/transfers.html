@@ -16,11 +16,12 @@
 </span>
       </ion-card-header>
       <ion-card-content>
-        <div class="card-line"><b>Transfer ID:</b> {{trans.name}}
+        <div class="card-line">
+          <span class="card-label">Transfer ID</span> <span class="align-right">{{trans.name}}</span>
       
       </div>
       <div class="card-line">
-        <b>Driver: </b>   {{trans.driver_name__c}}
+        <span class="card-label">Driver </span> <span class="align-right">{{trans.driver_name__c}}</span>
         </div>
       </ion-card-content>
     </ion-card>
@@ -34,9 +35,9 @@
 </span>
       </ion-card-header>
       <ion-card-content>
-        <b>Return ID:</b> {{ret.name}}
+        <span class="card-label">Return ID</span> <span class="align-right">{{ret.name}}</span>
         <br>
-        <b> Driver:</b> {{ret.driver_name__c}}
+        <span class="card-label">Driver</span> <span class="align-right">{{ret.driver_name__c}}</span>
         <br>
       </ion-card-content>
     </ion-card>

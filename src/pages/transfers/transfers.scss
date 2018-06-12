@@ -4,7 +4,7 @@ page-transfers {
     font-size: 1.6rem;
     color: #214d7c;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 13px;
     font-weight: 500;
     border-top: 1px solid #e8e8e8;
     background: #fff;
@@ -23,7 +23,10 @@ page-transfers {
     text-align: right;
     float: right;
   }
-  b{
+  .card-label{
       color: #214d7c;
+  }
+  .align-right{
+  float: right;
   }
 }

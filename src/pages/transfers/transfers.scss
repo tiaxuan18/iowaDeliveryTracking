@@ -19,9 +19,11 @@ page-transfers {
   ion-card {
     background: #e7ebf552 !important
   }
-  .align-right {
+  .label-icon {
     text-align: right;
     float: right;
-    color: #000000;
+  }
+  b{
+      color: #214d7c;
   }
 }

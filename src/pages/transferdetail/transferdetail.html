@@ -3,24 +3,33 @@
     <ion-title>{{item.recipient_company_name__c}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <ion-item>
-    <ion-label floating>Address</ion-label>
-    <ion-label floating>{{ item.name }}</ion-label>
-    <ion-label floating>{{ item.receiving_street_address__c }}</ion-label>
-    <ion-label floating>{{ item.receiving_city__c }}</ion-label>
-    <ion-label floating>{{ item.receiving_state__c }}</ion-label>
-    <ion-label floating>{{ item.receiving_zip_code__c }}</ion-label>
-  </ion-item>
-  <ion-list>
-    <ion-list-header>Items</ion-list-header>
-    <ion-label floating>{{item.Product_Codes__c}}</ion-label>
-  </ion-list>
+<ion-content padding class="page-transfer-detail">
+  <ion-card>
+    <ion-card-header>
+      Address <span class="label-icon"><ion-icon name="navigate"></ion-icon></span>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- <ion-label floating>{{ item.name }}
+      </ion-label> -->
+      <ion-label floating>{{ item.receiving_street_address__c }}</ion-label>
+      <ion-label floating>{{ item.receiving_city__c }}, {{ item.receiving_state__c }} {{ item.receiving_zip_code__c }}</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>Items <span class="label-icon"><ion-icon name="cube"></ion-icon></span>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label floating>{{item.Product_Codes__c}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <button block ion-button class="btn-default" padding>
+    <ion-icon name="check-mark"></ion-icon> &nbsp; Cancel
+  </button>
 </ion-content>
 <ion-footer padding>
   <div>
-    <button block ion-button (click) ="addToItinerary()">
-      Add To Itinerary
+    <button block ion-button (click)="addToItinerary()">
+      <ion-icon name="add-circle"></ion-icon> &nbsp; Add To Itinerary
     </button>
   </div>
-  </ion-footer>
+</ion-footer>

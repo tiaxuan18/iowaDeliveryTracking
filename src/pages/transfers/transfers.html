@@ -12,14 +12,16 @@
     <ion-list-header>Deliveries</ion-list-header>
     <ion-card *ngFor="let trans of data.transfers" (click)="itemTapped(trans)">
       <ion-card-header>
-        {{trans.recipient_company_name__c}} <span class="align-right">  <ion-icon name="bus"></ion-icon>
+        {{trans.recipient_company_name__c}} <span class="label-icon">  <ion-icon name="bus"></ion-icon>
 </span>
       </ion-card-header>
       <ion-card-content>
-        <b>Transfer ID:</b> {{trans.name}}
-        <br>
-        <b>Driver: </b> {{trans.driver_name__c}}
-        <br>
+        <div class="card-line"><b>Transfer ID:</b> {{trans.name}}
+      
+      </div>
+      <div class="card-line">
+        <b>Driver: </b>   {{trans.driver_name__c}}
+        </div>
       </ion-card-content>
     </ion-card>
     <ion-label *ngIf="data.transfers.length == 0">
@@ -28,7 +30,7 @@
     <ion-list-header>Returns</ion-list-header>
     <ion-card *ngFor="let ret of data.returns" (click)="itemTapped(ret)">
       <ion-card-header>
-        {{ret.recipient_company_name__c}} <span class="align-right">  <ion-icon name="return-left"></ion-icon>
+        {{ret.recipient_company_name__c}} <span class="label-icon">  <ion-icon name="return-left"></ion-icon>
 </span>
       </ion-card-header>
       <ion-card-content>

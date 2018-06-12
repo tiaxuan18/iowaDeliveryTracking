@@ -4,16 +4,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-
-   <form [formGroup]="transOwnerFrm" (ngSubmit)="transferItem(transOwnerFrm.value)">
-      <ion-item>
-        <ion-label floating>Reason for Transfer</ion-label>
-        <ion-textarea type="reason" formControlName="reason"></ion-textarea>
-      </ion-item>
-      <div>
-        <button ion-button [disabled]="!transOwnerFrm.valid" style="margin-top: 20px;" type="submit">
-          Transfer
-        </button>
-      </div>
+  <form [formGroup]="transOwnerFrm" (ngSubmit)="transferItem(transOwnerFrm.value)">
+    <ion-item>
+      <ion-label floating>Reason for Transfer</ion-label>
+      <ion-textarea type="reason" formControlName="reason"></ion-textarea>
+    </ion-item>
   </form>
 </ion-content>
+<ion-footer padding>
+  <div>
+    <button block ion-button [disabled]="!transOwnerFrm.valid" style="margin-top: 20px;" type="submit">
+      Transfer
+    </button>
+  </div>
+</ion-footer>

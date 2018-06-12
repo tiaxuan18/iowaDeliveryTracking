@@ -53,9 +53,12 @@
   <ion-label *ngIf="data.returns.length == 0">
       Nothing on your itinerary
   </ion-label>
-  <div>
-    <button ion-button (click) ="addTransfers()">
+
+</ion-content>
+<ion-footer padding>
+    <div>
+    <button block ion-button (click) ="addTransfers()">
       Add More Transfers
     </button>
   </div>
-</ion-content>
+  </ion-footer>

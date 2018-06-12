@@ -28,9 +28,11 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+   <div class="mb-1">
   <ion-label *ngIf="data.transfers.length == 0">
     No Deliveries on your itinerary
   </ion-label>
+</div>
   <ion-list>
     <ion-list-header>Returns</ion-list-header>
     <ion-item-sliding *ngFor="let ret of data.returns">
@@ -64,9 +66,11 @@
       Transfer Returns
     </button>
   </div>
+   <div class="mb-1">
   <ion-label *ngIf="data.returns.length == 0">
     Nothing on your itinerary
   </ion-label>
+</div>
 </ion-content>
 <ion-footer padding>
   <div>

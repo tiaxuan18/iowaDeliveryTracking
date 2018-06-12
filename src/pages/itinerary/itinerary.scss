@@ -1,3 +1,59 @@
-page-itinerary{
+page-itinerary {
 
+  .card-header-md {
+    font-size: 1.6rem;
+    color: #214d7c;
+    padding: 10px;
+    margin-bottom: 13px;
+    font-weight: 500;
+    border-top: 1px solid #e8e8e8;
+    background: #fff;
+  }
+  .list-md {
+    margin: 0px 0 30px;
+  }
+  .list-header-md {
+    font-size: 20px;
+    color: #000000;
+    padding-left: 16px;
+    margin-bottom: 0px;
+    min-height: 4.5rem;
+    border-top: 0px solid #ffffff;
+  }
+
+  ion-card {
+    background: #e7ebf552 !important
+  }
+  .label-icon {
+    text-align: right;
+    float: right;
+  }
+  .card-label {
+    color: #214d7c;
+  }
+  .align-right {
+    float: right;
+  }
+  .item-md [item-left],
+  .item-md [item-right],
+  .item-md [item-start],
+  .item-md [item-end] {
+    margin: -67px 8px 9px 0;
+  }
+  .bg-primary {
+    background: #214d7c;
+  }
+  .item-md {
+    padding-left: 0px;
+  }
+  .item-md.item-block .item-inner {
+    padding-right: 0px;
+    border-bottom: 0px solid #dedede;
+  }
+  .label-md {
+    margin: 0;
+  }
+  .returns-header{
+      padding-bottom: 3px;
+  }
 }

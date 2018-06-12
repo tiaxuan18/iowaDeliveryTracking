@@ -3,35 +3,53 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Open Transfers</ion-title>
+    <ion-title text-center><img class="logo" width="auto" height="40" src="../assets/img/idph-logo.png" /></ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <ion-list>
+<ion-content class="page-transfers" padding>
+  <ion-header class="header-title">Open Transfers</ion-header>
+  <ion-list class="list-one">
     <ion-list-header>Deliveries</ion-list-header>
-    <ion-item  *ngFor="let trans of data.transfers" (click)="itemTapped(trans)">
-        Company Name: {{trans.recipient_company_name__c}} <br>
-        Transfer ID : {{trans.name}} <br>
-        Driver Name: {{trans.driver_name__c}} <br>
-    </ion-item>
-  </ion-list>
-  <ion-label *ngIf="data.transfers.length == 0">
+    <ion-card *ngFor="let trans of data.transfers" (click)="itemTapped(trans)">
+      <ion-card-header>
+        {{trans.recipient_company_name__c}} <span class="label-icon">  <ion-icon name="bus"></ion-icon>
+</span>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="card-line">
+          <span class="card-label">Transfer ID:</span> <span class="align-right">{{trans.name}}</span>
+      
+      </div>
+      <div class="card-line">
+        <span class="card-label">Driver: </span> <span class="align-right">{{trans.driver_name__c}}</span>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-label *ngIf="data.transfers.length == 0">
       No Transfers Available
-  </ion-label>
-  <ion-list>
+    </ion-label>
     <ion-list-header>Returns</ion-list-header>
-    <button ion-item  *ngFor="let ret of data.returns" (click)="itemTapped(ret)">
-        Company Name: {{ret.recipient_company_name__c}} <br>
-        Return ID: {{ret.name}} <br>
-        Driver Name: {{ret.driver_name__c}} <br>
-    </button>
+    <ion-card *ngFor="let ret of data.returns" (click)="itemTapped(ret)">
+      <ion-card-header>
+        {{ret.recipient_company_name__c}} <span class="label-icon">  <ion-icon name="return-left"></ion-icon>
+</span>
+      </ion-card-header>
+      <ion-card-content>
+        <span class="card-label">Return ID:</span> <span class="align-right">{{ret.name}}</span>
+        <br>
+        <span class="card-label">Driver:</span> <span class="align-right">{{ret.driver_name__c}}</span>
+        <br>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
   <ion-label *ngIf="data.returns.length == 0">
-      No Returns Available
+    No Returns Available
   </ion-label>
+</ion-content>
+<ion-footer padding>
   <div>
-    <button ion-button (click) ="goHome()">
+    <button block ion-button (click)="goHome()">
       Done
     </button>
   </div>
-</ion-content>
+</ion-footer>

@@ -1,3 +1,32 @@
-page-transfers{
+page-transfers {
 
+  .card-header-md {
+    font-size: 1.6rem;
+    color: #214d7c;
+    padding: 10px;
+    margin-bottom: 13px;
+    font-weight: 500;
+    border-top: 1px solid #e8e8e8;
+    background: #fff;
+  }
+  .list-md {
+    margin: 0px 0 30px;
+  }
+  .list-header-md {
+    font-size: 20px;
+    color: #000000;
+  }
+  ion-card {
+    background: #e7ebf552 !important
+  }
+  .label-icon {
+    text-align: right;
+    float: right;
+  }
+  .card-label{
+      color: #214d7c;
+  }
+  .align-right{
+  float: right;
+  }
 }

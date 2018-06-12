@@ -3,28 +3,31 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>In Transit</ion-title>
+    <ion-title text-center><img class="logo" width="auto" height="40" src="../assets/img/idph-logo.png" /></ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding [class.hide]="!hasTransfer" > 
-  <ion-card>
+<ion-content padding>
+  <ion-header class="header-title">In Transit</ion-header>
+  <div class="hidden-content" [class.hide]="!hasTransfer">
+    <ion-card>
       <ion-card-content>
-          <div #directionsPanel></div>
+        <div #directionsPanel></div>
       </ion-card-content>
-  </ion-card>
-  <div #map id="map"></div>
-  <div>
-     <button ion-button (click) ="googleMaps()">
-      Launch Google Maps
-    </button>
-    <button ion-button (click) ="logAStop()">
-      Log a Stop
-    </button>
-     <button ion-button (click) ="transferOwnership()">
-      Transfer Ownership
-    </button>
-     <button ion-button (click) ="delivered()">
-      Delivered
-    </button>
+    </ion-card>
+    <div #map id="map"></div>
+    <div>
+      <button ion-button (click)="googleMaps()">
+        Launch Google Maps
+      </button>
+      <button ion-button (click)="logAStop()">
+        Log a Stop
+      </button>
+      <button ion-button (click)="transferOwnership()">
+        Transfer Ownership
+      </button>
+      <button ion-button (click)="delivered()">
+        Delivered
+      </button>
+    </div>
   </div>
 </ion-content>

@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,7 +12,64 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
- 
 .toolbar-background-md {
-	background-color: #214d7c;
+  background-color: #214d7c;
 }
+
+.toolbar-title-md,
+.bar-button-default-md,
+.bar-button-default-md:hover:not(.disable-hover) {
+  color: #ffffff;
+}
+
+img.logo {
+
+  padding-right: 44px;
+}
+
+.header-title {
+  color: #214d7c;
+  font-size: 18px;
+  text-align: center;
+  background-color: #e7ebf5;
+  padding: 3px;
+}
+ion-menu .item-md{
+	color: #214d7c;
+}
+ion-app.md [padding-top] .scroll-content, ion-app.md [padding] .scroll-content {
+  padding-top: 30px;
+}
+.toast-success .toast-wrapper{
+	background: #4caf50 !important;
+}
+.toast-error .toast-wrapper{
+	background: #d80202 !important;
+}
+ion-list.list-one .list-header-md{
+
+border-top: 0px solid #fff;
+
+}
+.button-md{
+	    height: 4.6rem;
+}
+.btn-default{
+	background: #e2e5ee;
+    color: #214d7c;
+    width: calc(100% - 20px);
+    margin-left: 9px;
+
+}
+.button-md:hover:not(.disable-hover) {
+    background-color: #214d7c;
+    color: #e2e5ee;
+}
+.badge-md{
+    color: #fff;
+    border-radius: 11px;
+}
+.mb-1{
+	margin-bottom: 1rem;
+}
+

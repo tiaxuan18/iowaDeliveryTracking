@@ -12,13 +12,14 @@ page-itinerary {
   .list {
     margin: 0px 0 30px;
   }
-  .list-header  {
+  .list-header, .list-header-ios  {
     font-size: 20px;
     color: #000000;
     padding-left: 16px;
     margin-bottom: 0px;
     min-height: 4.5rem;
-    border-top: 0px solid #ffffff;
+    border-top: 0px solid #ffffff !important;
+    border-bottom: 0px solid #ffffff !important;
   }
 
   ion-card {
@@ -48,7 +49,7 @@ page-itinerary {
   }
   .item.item-block .item-inner {
     padding-right: 0px;
-    border-bottom: 0px solid #dedede;
+    border-bottom: 0px solid #dedede !important;
   }
   .label {
     margin: 0;

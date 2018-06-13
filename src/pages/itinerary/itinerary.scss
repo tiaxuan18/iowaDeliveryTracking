@@ -1,6 +1,6 @@
 page-itinerary {
 
-  .card-header-md {
+  .card-header {
     font-size: 1.6rem;
     color: #214d7c;
     padding: 10px;
@@ -9,16 +9,17 @@ page-itinerary {
     border-top: 1px solid #e8e8e8;
     background: #fff;
   }
-  .list-md {
+  .list {
     margin: 0px 0 30px;
   }
-  .list-header-md {
+  .list-header, .list-header-ios  {
     font-size: 20px;
     color: #000000;
     padding-left: 16px;
     margin-bottom: 0px;
     min-height: 4.5rem;
-    border-top: 0px solid #ffffff;
+    border-top: 0px solid #ffffff !important;
+    border-bottom: 0px solid #ffffff !important;
   }
 
   ion-card {
@@ -34,23 +35,23 @@ page-itinerary {
   .align-right {
     float: right;
   }
-  .item-md [item-left],
-  .item-md [item-right],
-  .item-md [item-start],
-  .item-md [item-end] {
+  .item [item-left],
+  .item [item-right],
+  .item [item-start],
+  .item [item-end] {
     margin: -67px 8px 9px 0;
   }
   .bg-primary {
     background: #214d7c;
   }
-  .item-md {
+  .item {
     padding-left: 0px;
   }
-  .item-md.item-block .item-inner {
+  .item.item-block .item-inner {
     padding-right: 0px;
-    border-bottom: 0px solid #dedede;
+    border-bottom: 0px solid #dedede !important;
   }
-  .label-md {
+  .label {
     margin: 0;
   }
   .returns-header{

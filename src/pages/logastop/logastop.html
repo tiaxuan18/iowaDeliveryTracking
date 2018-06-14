@@ -21,12 +21,15 @@
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
       <div>
-        <button ion-button [disabled]="!logastopFrm.valid || stopBegan" (click) ="beginStop()">
+        <button class="primary mt-2" ion-button block [disabled]="!logastopFrm.valid || stopBegan" (click) ="beginStop()">
           Begin Stop
         </button>
-        <button ion-button (click) ="resume()" [disabled]="!logastopFrm.valid && !stopBegan">
-          Resume
-        </button>
+        
       </div>
   </form>
 </ion-content>
+<ion-footer padding>
+  <button class="default" ion-button block (click) ="resume()" [disabled]="!logastopFrm.valid && !stopBegan">
+          Resume
+        </button>
+  </ion-footer>

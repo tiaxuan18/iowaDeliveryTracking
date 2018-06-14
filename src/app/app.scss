@@ -43,6 +43,9 @@ ion-app [padding-top] .scroll-content, ion-app [padding] .scroll-content {
 .toast-error .toast-wrapper{
 	background: #d80202 !important;
 }
+.toast-warning .toast-wrapper{
+ background: #f89406 !important;
+}
 ion-list.list-one .list-header{
 
 border-top: 0px solid #fff !important;

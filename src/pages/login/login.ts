@@ -48,7 +48,8 @@ export class LoginPage {
           let t = this.toast.create({ message:errorObj.message, 
                               duration: 5000, 
                               position: 'top',
-                              showCloseButton: true});
+                              showCloseButton: true,
+                              cssClass: 'toast-error'});
           t.present();
       })
   }
@@ -63,7 +64,8 @@ export class LoginPage {
           let t = this.toast.create({ message: 'You will receive a email with additional instructions', 
                                 duration: 5000, 
                                 position: 'top',
-                                showCloseButton: true});
+                                showCloseButton: true,
+                                cssClass: 'toast-success'});
             t.present();
 
         })
@@ -73,14 +75,16 @@ export class LoginPage {
             let t = this.toast.create({ message:errorObj.message, 
                                 duration: 5000, 
                                 position: 'top',
-                                showCloseButton: true});
+                                showCloseButton: true,
+                                cssClass: 'toast-error'});
             t.present();
         })
       } else {
          let t = this.toast.create({ message: 'Email is required to reset password', 
                                 duration: 5000, 
                                 position: 'top',
-                                showCloseButton: true});
+                                showCloseButton: true,
+                                cssClass: 'toast-error'});
           t.present();
 
       }

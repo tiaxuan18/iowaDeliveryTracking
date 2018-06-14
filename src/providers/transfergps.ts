@@ -83,7 +83,8 @@ export class TransferGPSService {
                             let t = this.toast.create({ message:errorObj.message, 
                                                 duration: 5000, 
                                                 position: 'top',
-                                                showCloseButton: true});
+                                                showCloseButton: true,
+                                                cssClass: 'toast-error'});
                             t.present();
                         }
                     });

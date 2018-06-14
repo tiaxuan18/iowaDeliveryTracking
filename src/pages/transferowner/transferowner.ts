@@ -56,7 +56,8 @@ export class TransferOwnerPage {
               let t = this.toast.create({ message:errorObj.message, 
                                   duration: 5000, 
                                   position: 'top',
-                                  showCloseButton: true});
+                                  showCloseButton: true,
+                                  cssClass: 'toast-error'});
               t.present();
             }  
         });
@@ -78,7 +79,8 @@ export class TransferOwnerPage {
                 let t = this.toast.create({ message: 'The item has been put back in process', 
                                             duration: 5000, 
                                             position: 'top',
-                                            showCloseButton: true});
+                                            showCloseButton: true,
+                                            cssClass: 'toast-success'});
                 t.present(); 
                 this.storage.remove('intransit');
                 t.onDidDismiss(() => {
@@ -93,7 +95,8 @@ export class TransferOwnerPage {
                   let t = this.toast.create({ message:errorObj.message, 
                                       duration: 5000, 
                                       position: 'top',
-                                      showCloseButton: true});
+                                      showCloseButton: true,
+                                      cssClass: 'toast-error'});
                   t.present();
               }
             });

@@ -18,8 +18,9 @@ page-intransit {
     display: none;
   }
   .directions-panel {
-    width: 60%;
+    width: 90%;
     margin-left: 2rem;
+    line-height: 3rem;
   }
 
   .adp-placemark {
@@ -33,8 +34,5 @@ page-intransit {
     line-height: 20px;
     font-weight: 500 !important;
   }
-  .default {
-  
-  }
-  
+  .default {}
 }

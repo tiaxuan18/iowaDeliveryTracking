@@ -15,8 +15,9 @@ page-transfers {
   .list-header {
     font-size: 20px;
     color: #000000;
+    padding-left: 0px;
   }
-  .list-header-ios  {
+  .list-header-ios {
     border-top: 0px solid #ffffff !important;
     border-bottom: 0px solid #ffffff !important;
   }
@@ -27,10 +28,10 @@ page-transfers {
     text-align: right;
     float: right;
   }
-  .card-label{
-      color: #214d7c;
+  .card-label {
+    color: #214d7c;
   }
-  .align-right{
-  float: right;
+  .align-right {
+    float: right;
   }
 }

@@ -48,7 +48,8 @@ export class ItineraryPage {
             let t = this.toast.create({ message: 'You have items in transit',
                                 duration: 5000, 
                                 position: 'top',
-                                showCloseButton: true});
+                                showCloseButton: true,
+                                cssClass: 'toast-warn'});
             t.present();
           }
           oppoService.getItineraries(user.sfid)
@@ -67,7 +68,8 @@ export class ItineraryPage {
               let t = this.toast.create({ message:errorObj.message, 
                                   duration: 5000, 
                                   position: 'top',
-                                  showCloseButton: true});
+                                  showCloseButton: true,
+                                  cssClass: 'toast-error'});
               t.present();
             }
           });
@@ -79,7 +81,8 @@ export class ItineraryPage {
             let t = this.toast.create({ message:errorObj.message, 
                                 duration: 5000, 
                                 position: 'top',
-                                showCloseButton: true});
+                                showCloseButton: true,
+                                cssClass: 'toast-error'});
             t.present();
           }
         });
@@ -156,7 +159,8 @@ export class ItineraryPage {
               let t = this.toast.create({ message:errorObj.message, 
                                   duration: 5000, 
                                   position: 'top',
-                                  showCloseButton: true});
+                                  showCloseButton: true,
+                                  cssClass: 'toast-error'});
               t.present();
             }
         });
@@ -170,7 +174,8 @@ export class ItineraryPage {
       let t = this.toast.create({ message: 'Return added',
                                   duration: 5000, 
                                   position: 'top',
-                                  showCloseButton: true});
+                                  showCloseButton: true,
+                                  cssClass: 'toast-success'});
       t.present();
       item.addedToReturn = true;
     }

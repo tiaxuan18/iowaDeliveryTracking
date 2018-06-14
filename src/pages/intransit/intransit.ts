@@ -61,7 +61,8 @@ export class InTransitPage {
 			        	let t = this.toast.create({ message: 'Nothing in transit!', 
 		                                duration: 5000, 
 		                                position: 'top',
-		                                showCloseButton: true});
+		                                showCloseButton: true,
+                                		cssClass: 'toast-warning'});
 		            	t.present();
 			        }
 			        
@@ -73,7 +74,8 @@ export class InTransitPage {
 		            let t = this.toast.create({ message:errorObj.message, 
 		                                duration: 5000, 
 		                                position: 'top',
-		                                showCloseButton: true});
+		                                showCloseButton: true,
+		                                cssClass: 'toast-error'});
 		            t.present();
 		          }
 		        });
@@ -109,7 +111,8 @@ export class InTransitPage {
 			let t = this.toast.create({ message:'Error getting location' + error, 
 			                                duration: 5000, 
 			                                position: 'top',
-			                                showCloseButton: true});
+			                                showCloseButton: true,
+		                                	cssClass: 'toast-error'});
 			 t.present();
 		});
 
@@ -127,7 +130,8 @@ export class InTransitPage {
 		    		let t = this.toast.create({ message:'Error launching navigator', 
 	                                  duration: 5000, 
 	                                  position: 'top',
-	                                  showCloseButton: true});
+	                                  showCloseButton: true,
+		                              cssClass: 'toast-error'});
 	              	t.present();
 		    	}
 		  	);
@@ -165,7 +169,8 @@ export class InTransitPage {
 		              let t = this.toast.create({ message:errorObj.message, 
 		                                  duration: 5000, 
 		                                  position: 'top',
-		                                  showCloseButton: true});
+		                                  showCloseButton: true,
+		                                  cssClass: 'toast-error'});
 		              t.present();
 	            	}
 	           	});

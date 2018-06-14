@@ -1,7 +1,7 @@
 {
   "name": "iowaDeliveryTracking",
-  "version": "0.0.1",
-  "author": "Tia Xuan",
+  "version": "0.0.6",
+  "author": "Drew Benson",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",

@@ -64,7 +64,8 @@ export class LogAStopPage {
               let t = this.toast.create({ message: 'Stop Logged', 
                                           duration: 5000, 
                                           position: 'top',
-                                          showCloseButton: true});
+                                          showCloseButton: true,
+                                          cssClass: 'toast-success'});
               t.present();
             }
 
@@ -86,7 +87,8 @@ export class LogAStopPage {
                 let t = this.toast.create({ message:errorObj.message, 
                                     duration: 5000, 
                                     position: 'top',
-                                    showCloseButton: true});
+                                    showCloseButton: true,
+                                    cssClass: 'toast-error'});
                 t.present();
             }
       });
@@ -106,7 +108,8 @@ export class LogAStopPage {
                 let t = this.toast.create({ message: 'Resumed', 
                                             duration: 5000, 
                                             position: 'top',
-                                            showCloseButton: true});
+                                            showCloseButton: true,
+                                            cssClass: 'toast-success'});
                 t.present(); 
                 this.storage.remove('loggedastop');
                 t.onDidDismiss(() => {
@@ -123,7 +126,8 @@ export class LogAStopPage {
                   let t = this.toast.create({ message:errorObj.message, 
                                       duration: 5000, 
                                       position: 'top',
-                                      showCloseButton: true});
+                                      showCloseButton: true,
+                                      cssClass: 'toast-error'});
                   t.present();
               }
        });

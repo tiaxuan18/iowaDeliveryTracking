@@ -1,20 +1,47 @@
-page-intransit{
-	 .scroll {
-        height: 100%
-    }
+page-intransit {
+  .scroll {
+    height: 100%
+  }
 
-	 #map {
-    	height: 60%;
-  	}
-  	
-  	ion-card {
-            max-height: 200px;
-            overflow: scroll;
-            position: absolute;
-            z-index: 1;
-    }
-    .hide {
-      display: none;
-    }
+  #map {
+    min-height: 350px;
+    margin-top: 1rem;
+  }
 
+  ion-card {
+    max-height: 200px;
+    overflow: scroll;
+    position: absolute;
+    z-index: 1;
+  }
+  .hide {
+    display: none;
+  }
+  .directions-panel {
+    width: 50%;
+  }
+
+  .adp-placemark {
+    background: #fff;
+    border: 0px solid silver;
+    color: #214d7c !important;
+    cursor: pointer;
+    margin: 20px 0px 23px 0px;
+    vertical-align: middle;
+
+    line-height: 20px;
+    font-weight: 500 !important;
+  }
+  .default {}
+  .primary {
+    color: #ffffff;
+    background: #214d7c;
+  }
+  .secondary {
+    color: #214d7c;
+    background: #e7ebf5;
+  }
+  .mt-1 {
+    margin-top: 2rem;
+  }
 }

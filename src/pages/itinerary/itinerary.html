@@ -27,13 +27,11 @@
         <br>
       </ion-card-content>
     </ion-card>
+    <ion-label *ngIf="data.transfers.length == 0">
+      No Deliveries on your itinerary
+    </ion-label>
   </ion-list>
-   <div class="mb-1">
-  <ion-label *ngIf="data.transfers.length == 0">
-    No Deliveries on your itinerary
-  </ion-label>
-</div>
-  <ion-list>
+  <ion-list class="list-one">
     <ion-list-header>Returns</ion-list-header>
     <ion-item-sliding *ngFor="let ret of data.returns">
       <ion-item>
@@ -50,8 +48,8 @@
             <span class="card-label">Type:</span> {{ ret.record_type_name__c }}
             <br>
             <span class="card-label">Transfer Type:</span> {{ ret.transfer_type__c }}
-            
-          </ion-card-content><ion-badge class="label-icon bg-primary" item-end>Return</ion-badge>
+          </ion-card-content>
+          <ion-badge class="label-icon bg-primary" item-end>Return</ion-badge>
         </ion-card>
       </ion-item>
       <ion-item-options side="right">
@@ -60,17 +58,17 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
+    <div *ngIf="data.returns.length > 0">
+      <button class="btn-default" block ion-button (click)="transferReturns()">
+        Transfer Returns
+      </button>
+    </div>
+    <div class="mb-1">
+      <ion-label *ngIf="data.returns.length == 0">
+        Nothing on your itinerary
+      </ion-label>
+    </div>
   </ion-list>
-  <div *ngIf="data.returns.length > 0">
-    <button class="btn-default" block ion-button (click)="transferReturns()">
-      Transfer Returns
-    </button>
-  </div>
-   <div class="mb-1">
-  <ion-label *ngIf="data.returns.length == 0">
-    Nothing on your itinerary
-  </ion-label>
-</div>
 </ion-content>
 <ion-footer padding>
   <div>

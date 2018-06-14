@@ -12,7 +12,8 @@ page-itinerary {
   .list {
     margin: 0px 0 30px;
   }
-  .list-header, .list-header-ios  {
+  .list-header,
+  .list-header-ios {
     font-size: 20px;
     color: #000000;
     padding-left: 16px;
@@ -54,7 +55,7 @@ page-itinerary {
   .label {
     margin: 0;
   }
-  .returns-header{
-      padding-bottom: 3px;
+  .returns-header {
+    padding-bottom: 3px;
   }
 }

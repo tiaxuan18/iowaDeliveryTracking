@@ -16,5 +16,8 @@
     text-align: right;
     float: right;
   }
-
+.item.item-block .item-inner {
+    padding-right: 8px;
+    border-bottom: 1px solid #ffffff;
+}
 }

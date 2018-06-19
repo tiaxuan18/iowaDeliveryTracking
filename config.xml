@@ -95,4 +95,5 @@
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
     <engine name="android" spec="~7.0.0" />
     <engine name="ios" spec="~4.5.4" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
 </widget>

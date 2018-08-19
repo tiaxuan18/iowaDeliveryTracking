@@ -94,7 +94,13 @@ ion-list.list-one .list-header {
   background: #214d7c;
 }
 
-.secondary {
+.secondary{
   color: #214d7c;
   background: #e7ebf5;
+
+:focus, :active, :hover, :visited {
+    outline: none;
+    color: #ffffff;
+}
+
 }

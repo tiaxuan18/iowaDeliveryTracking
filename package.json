@@ -26,7 +26,7 @@
     "@ionic-native/launch-navigator": "^4.7.0",
     "@ionic-native/splash-screen": "4.7.0",
     "@ionic-native/sqlite": "^4.7.0",
-    "@ionic-native/status-bar": "4.7.0",
+    "@ionic-native/status-bar": "^4.7.0",
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "2.1.3",
     "angular2-uuid": "^1.1.1",
@@ -41,6 +41,7 @@
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-toast": "^2.6.2",
     "cordova-sqlite-storage": "^2.3.1",
@@ -72,7 +73,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
-      }
+      },
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
       "android",

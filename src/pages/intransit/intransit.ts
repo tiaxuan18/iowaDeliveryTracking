@@ -7,6 +7,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { OpportunityService } from '../../providers/opportunity';
 import { LoadingService } from '../../providers/loading';
 import { TransferGPSService } from '../../providers/transfergps';
+import { HelperService } from '../../providers/helper';
 
 import { LogAStopPage } from '../logastop/logastop';
 import { TransferOwnerPage } from '../transferowner/transferowner';
@@ -40,7 +41,8 @@ export class InTransitPage {
               private oppoService : OpportunityService,
               private geolocation: Geolocation,
               private transferGPS : TransferGPSService,
-              private launchNavigator: LaunchNavigator) {
+              private launchNavigator: LaunchNavigator,
+              private helper : HelperService) {
 
         this.hasTransfer = false;
        	this.loading.show();
@@ -152,14 +154,15 @@ export class InTransitPage {
    	delivered(){
    		this.loading.show();
 	    var body = { colNames : ['arrival_time__c', 'status__c'],
-	                 vals : [Date.now, 'Completed']}
+	                 vals : [this.helper.formatDate(new Date()), 'Completed']}
 	    for(let i=0;i<this.items.length;i++){
          	this.oppoService.updateOpportunity(this.items[i].sfid, body)
 		        .then( data => {
+		        	debugger;
 		        	if (i == (this.items.length -1)){
                         this.transferGPS.stopGPSTracking();
 		          		this.loading.hide();  
-		          		this.navCtrl.setRoot(InTransitPage, {item: this.item});  
+		          		this.navCtrl.setRoot(ItineraryPage, {});  
                   	}
 		        })
 		        .catch( errorReq => {
@@ -175,7 +178,6 @@ export class InTransitPage {
 	            	}
 	           	});
         } 
-   		this.navCtrl.setRoot(ItineraryPage); 
 	}
 
 

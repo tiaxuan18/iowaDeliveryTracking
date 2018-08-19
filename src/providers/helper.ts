@@ -19,6 +19,11 @@ export class HelperService {
     	return passedDate.toISOString().slice(0, 19).replace('T', ' ');
   	}
 
+  	addDateSeconds(passedDate, duration){
+  		passedDate.setSeconds(passedDate.getSeconds() + duration);
+    	return passedDate.toISOString().slice(0, 19).replace('T', ' ');
+  	}
+
   	getTokenHeader(){
   		return new Promise( (resolve, reject) => {
   			this.storage.get('token').then((token) =>{

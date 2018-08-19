@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { OpportunityService } from '../../providers/opportunity';
 import { TransferGPSService } from '../../providers/transfergps';
 import { LoadingService } from '../../providers/loading';
+import { HelperService } from '../../providers/helper';
 
 import { TransfersPage } from '../transfers/transfers';
 import { InTransitPage } from '../intransit/intransit';
@@ -31,7 +32,8 @@ export class ItineraryPage {
               private loading: LoadingService,
               private oppoService : OpportunityService,
               private transferGPS : TransferGPSService,
-              private geolocation: Geolocation) {
+              private geolocation: Geolocation,
+              private helper : HelperService) {
 
     this.returns = [];
     this.data = {transfers:[], returns:[]};
@@ -42,7 +44,7 @@ export class ItineraryPage {
       oppoService.getInTransit(user.sfid)
       .then( dataInTransit => {
           let inTransitData = <any>{};
-          inTransitData = dataInTransit
+          inTransitData = dataInTransit;
           if (inTransitData.data.length > 0){
             this.inTransit = true;
             let t = this.toast.create({ message: 'You have items in transit',
@@ -118,13 +120,13 @@ export class ItineraryPage {
                     if (isReturn){
                       for(let i=0;i<this.returns.length;i++){
                         if (i == this.returns.length -1){
-                          this.doGo(this.returns[i], true);
+                          this.doGo(this.returns[i], true, response.rows[0].elements[0].duration.value);
                         } else {
-                          this.doGo(this.returns[i], false);
+                          this.doGo(this.returns[i], false, response.rows[0].elements[0].duration.value);
                         }
                       }
                     } else {
-                      this.doGo(item, true);
+                      this.doGo(item, true, response.rows[0].elements[0].duration.value);
                     }
                   }
                 }]
@@ -139,10 +141,11 @@ export class ItineraryPage {
     }
   }
 
-  doGo(selectedItem, lastItem){
+  doGo(selectedItem, lastItem, durationInSeconds){
     this.loading.show();
-    var body = { colNames : ['driver__c', 'status__c'],
-                 vals : [this.user.sfid, 'In Transit']}
+    debugger;
+    var body = { colNames : ['driver__c', 'status__c', 'Departure_time__c', 'Estimated_time_of_arrival__c'],
+                 vals : [this.user.sfid, 'In Transit', this.helper.formatDate(new Date()), this.helper.addDateSeconds(new Date(), durationInSeconds)]}
 
     this.oppoService.updateOpportunity(selectedItem.sfid, body)
         .then( data => {

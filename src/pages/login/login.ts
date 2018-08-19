@@ -59,7 +59,6 @@ export class LoginPage {
       this.loading.show();
       this.employeeService.resetPassword(this.loginFrm.value.username)
         .then( data => {
-          debugger;
           this.loading.hide();
           let t = this.toast.create({ message: 'You will receive a email with additional instructions', 
                                 duration: 5000, 

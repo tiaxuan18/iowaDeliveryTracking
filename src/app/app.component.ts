@@ -11,6 +11,8 @@ import { ItineraryPage } from '../pages/itinerary/itinerary';
 import { InTransitPage } from '../pages/intransit/intransit';
 import { LogoutPage } from '../pages/logout/logout';
 
+import * as ServiceSettings from '../providers/config';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -60,8 +62,22 @@ export class MyApp {
   }
 
   openPage(page) {
+    var maxTimeDiff = ServiceSettings.LOGIN_INTERVAL*1000*60*60;
+    this.storage.get('user').then((user) => {
+      var now = new Date().getTime();
+      if (user.Transfer_App_Last_Login__c){
+        var lastLoginTime = new Date(user.Transfer_App_Last_Login__c).getTime();
+        var loginTime = now - lastLoginTime;
+        if (loginTime >= maxTimeDiff){
+          this.nav.setRoot(LoginPage);
+        } else {
+           this.nav.setRoot(page.component);
+        }
+      } else {
+        this.nav.setRoot(LoginPage);
+      }
+    });
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
   }
 }

@@ -70,7 +70,7 @@ export class TransferOwnerPage {
 
     for(let i=0;i<this.transitItems.length;i++){
       var bodyOppo = { colNames : ['arrival_time__c', 'status__c', 'driver__c'],
-                     vals : [this.helper.formatDate(new Date()), 'Pending', '']}
+                     vals : [this.helper.formatDate(new Date()), 'Pending', 'NULL']}
 
       this.oppoService.updateOpportunity(this.transitItems[i].sfid, bodyOppo)
             .then( data => {

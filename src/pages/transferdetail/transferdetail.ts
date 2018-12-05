@@ -30,10 +30,10 @@ export class TransferDetailPage {
   addToItinerary(){
     this.loading.show();
     this.storage.get('user').then((user) => {
-      var body = { colNames : ['driver__c', 'status__c'],
-                   vals : [user.sfid, 'Pending']}
+      var body = { colNames : ['Driver__c', 'Status__c'],
+                   vals : [user.Id, 'Pending']}
 
-      this.oppoService.updateOpportunity(this.item.sfid, body)
+      this.oppoService.updateOpportunity(this.item.Id, body)
         .then( data => {
           this.loading.hide();  
           this.navCtrl.setRoot(TransfersPage); 

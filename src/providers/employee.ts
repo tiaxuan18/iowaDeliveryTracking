@@ -25,13 +25,11 @@ export class EmployeeService {
             this.httpService.post(this.employeeURL, body)
             .subscribe(
                 data => {
-                    debugger;
                     let resp = data.json();
-                    this.storage.set('token', {userid: resp.data.sfid, token: resp.token});
+                    this.storage.set('token', {userid: resp.data.Id, token: resp.token});
                     resolve(data.json())
                 },
                 err => { 
-                 debugger;
                     reject(err);
                 }
             );

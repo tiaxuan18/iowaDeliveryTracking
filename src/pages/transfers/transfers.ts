@@ -25,7 +25,8 @@ export class TransfersPage {
     this.data = {transfers:[], returns:[]};
     this.loading.show();
     this.storage.get('user').then((user) => {
-      oppoService.getTransfers(user.employer__c)
+
+      oppoService.getTransfers(user.Employer__c)
         .then( data => {
           this.loading.hide();
           this.storage.set('transfers', data);

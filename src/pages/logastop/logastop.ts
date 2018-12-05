@@ -55,8 +55,8 @@ export class LogAStopPage {
     this.loading.show();
     this.items = [];
     for(let i=0;i<this.transitItems.length;i++){
-      var body = {  colNames : ["stop_reason__c", "stop_details__c", "begin_stop__c", "transfer__c"],
-                      vals : [this.logastopFrm.value.reason, this.logastopFrm.value.description, this.helper.formatDate(new Date()), this.transitItems[i].sfid]}
+      var body = {  colNames : ["Stop_reason__c", "Stop_details__c", "Begin_stop__c", "Transfer__c"],
+                      vals : [this.logastopFrm.value.reason, this.logastopFrm.value.description, this.helper.formatDate(new Date()), this.transitItems[i].Id]}
       this.transfer.createLogAStop(body)
           .then( data => {
             if (i == (this.transitItems.length -1)){
@@ -80,7 +80,6 @@ export class LogAStopPage {
             
           })
           .catch( errorReq => {
-            debugger;
               this.loading.hide();  
               var errorObj  = JSON.parse(errorReq._body);
               if (errorObj.message){
@@ -99,7 +98,7 @@ export class LogAStopPage {
   resume(){
     this.loading.show();
     for(let i=0;i<this.items.length;i++){
-      var body = {  colNames : ['finish_stop__c'],
+      var body = {  colNames : ['Finish_stop__c'],
                     vals : [this.helper.formatDate(new Date())]}
       this.transfer.updateTransferLog(this.items[i].id, body)
             .then( data => {

@@ -12,18 +12,18 @@
     <ion-list-header>Deliveries</ion-list-header>
     <ion-card *ngFor="let trans of data.transfers" (click)="itemTapped(trans, false)">
       <ion-card-header>
-        <ion-badge class="bg-primary" item-start>1</ion-badge> &nbsp;<span class="card-label"> {{ trans.name }} </span>
+        <ion-badge class="bg-primary" item-start>1</ion-badge> &nbsp;<span class="card-label"> {{ trans.Name }} </span>
       </ion-card-header>
       <ion-card-content>
         <div class="mb-1">
-          {{ trans.receiving_street_address__c }} {{ trans.receiving_city__c }}, {{ trans.receiving_state__c }}, {{ trans.receiving_zip_code__c }}
+          {{ trans.receiving_Street_address__c }} {{ trans.receiving_City__c }}, {{ trans.receiving_State__c }}, {{ trans.receiving_Zip_code__c }}
         </div>
         <ion-badge class="label-icon" item-end>Delivery</ion-badge>
-        <span class="card-label">Status:</span> {{ trans.status__c }}
+        <span class="card-label">Status:</span> {{ trans.Status__c }}
         <br>
-        <span class="card-label">Type:</span> {{ trans.record_type_name__c }}
+        <span class="card-label">Type:</span> {{ trans.Record_Type_Name__c }}
         <br>
-        <span class="card-label">Transfer Type:</span> {{ trans.transfer_type__c }}
+        <span class="card-label">Transfer Type:</span> {{ trans.Transfer_Type__c }}
         <br>
       </ion-card-content>
     </ion-card>
@@ -41,13 +41,13 @@
           </ion-card-header>
           <ion-card-content>
             <div class="mb-1">
-              {{ ret.receiving_street_address__c }} {{ ret.receiving_city__c }}, {{ ret.receiving_state__c }}, {{ ret.receiving_zip_code__c }}
+              {{ ret.receiving_Street_address__c }} {{ ret.receiving_City__c }}, {{ ret.receiving_State__c }}, {{ ret.receiving_Zip_code__c }}
             </div>
-            <span class="card-label">Status:</span> {{ ret.status__c }}
+            <span class="card-label">Status:</span> {{ ret.Status__c }}
             <br>
-            <span class="card-label">Type:</span> {{ ret.record_type_name__c }}
+            <span class="card-label">Type:</span> {{ ret.Record_Type_Name__c }}
             <br>
-            <span class="card-label">Transfer Type:</span> {{ ret.transfer_type__c }}
+            <span class="card-label">Transfer Type:</span> {{ ret.Transfer_Type__c }}
           </ion-card-content>
           <ion-badge class="label-icon bg-primary" item-end>Return</ion-badge>
         </ion-card>

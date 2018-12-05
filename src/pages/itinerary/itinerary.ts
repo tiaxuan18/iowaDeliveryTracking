@@ -41,7 +41,7 @@ export class ItineraryPage {
     this.loading.show();
     this.storage.get('user').then((user) => {
       this.user = user;
-      oppoService.getInTransit(user.sfid)
+      oppoService.getInTransit(user.Id)
       .then( dataInTransit => {
           let inTransitData = <any>{};
           inTransitData = dataInTransit;
@@ -54,7 +54,7 @@ export class ItineraryPage {
                                 cssClass: 'toast-warn'});
             t.present();
           }
-          oppoService.getItineraries(user.sfid)
+          oppoService.getItineraries(user.Id)
           .then( data => {
             this.loading.hide();
             this.storage.set('itinerary', data);
@@ -97,10 +97,10 @@ export class ItineraryPage {
       this.loading.show();
       this.geolocation.getCurrentPosition().then((resp) => {
         var origin = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-        var end = item.receiving_street_address__c + ',' + 
-                  item.receiving_city__c +  ',' +
-                  item.receiving_state__c +  ',' +
-                  item.receiving_zip_code__c ;
+        var end = item.receiving_Street_address__c + ',' + 
+                  item.receiving_City__c +  ',' +
+                  item.receiving_State__c +  ',' +
+                  item.receiving_Zip_code__c ;
         this.directionMatrixService.getDistanceMatrix({
             origins: [origin],
             destinations: [end],
@@ -143,11 +143,10 @@ export class ItineraryPage {
 
   doGo(selectedItem, lastItem, durationInSeconds){
     this.loading.show();
-    debugger;
-    var body = { colNames : ['driver__c', 'status__c', 'Departure_time__c', 'Estimated_time_of_arrival__c'],
-                 vals : [this.user.sfid, 'In Transit', this.helper.formatDate(new Date()), this.helper.addDateSeconds(new Date(), durationInSeconds)]}
+    var body = { colNames : ['Driver__c', 'Status__c', 'Departure_time__c', 'Estimated_time_of_arrival__c'],
+                 vals : [this.user.Id, 'In Transit', this.helper.formatDate(new Date()), this.helper.addDateSeconds(new Date(), durationInSeconds)]}
 
-    this.oppoService.updateOpportunity(selectedItem.sfid, body)
+    this.oppoService.updateOpportunity(selectedItem.Id, body)
         .then( data => {
           this.loading.hide(); 
           if (lastItem){

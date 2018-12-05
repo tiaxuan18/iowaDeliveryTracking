@@ -12,15 +12,15 @@
     <ion-list-header>Deliveries</ion-list-header>
     <ion-card *ngFor="let trans of data.transfers" (click)="itemTapped(trans)">
       <ion-card-header>
-        {{trans.recipient_company_name__c}} <span class="label-icon">  <ion-icon name="bus"></ion-icon>
+        {{trans.Recipient_Company_Name__c}} <span class="label-icon">  <ion-icon name="bus"></ion-icon>
 </span>
       </ion-card-header>
       <ion-card-content>
         <div class="card-line mb-1">
-          <span class="card-label">Transfer ID:</span> <span class="align-right">{{trans.name}}</span>
+          <span class="card-label">Transfer ID:</span> <span class="align-right">{{trans.Name}}</span>
         </div>
         <div class="card-line mb-1">
-          <span class="card-label">Driver: </span> <span class="align-right">{{trans.driver_name__c}}</span>
+          <span class="card-label">Driver: </span> <span class="align-right">{{trans.Driver_Name__c}}</span>
         </div>
       </ion-card-content>
     </ion-card>
@@ -30,15 +30,15 @@
     <ion-list-header>Returns</ion-list-header>
     <ion-card *ngFor="let ret of data.returns" (click)="itemTapped(ret)">
       <ion-card-header>
-        {{ret.recipient_company_name__c}} <span class="label-icon">  <ion-icon name="return-left"></ion-icon>
+        {{ret.Recipient_Company_Name__c}} <span class="label-icon">  <ion-icon name="return-left"></ion-icon>
 </span>
       </ion-card-header>
       <ion-card-content>
         <div class="card-line mb-1">
-          <span class="card-label">Return ID:</span> <span class="align-right">{{ret.name}}</span>
+          <span class="card-label">Return ID:</span> <span class="align-right">{{ret.Name}}</span>
         </div>
         <div class="card-line mb-1">
-          <span class="card-label">Driver:</span> <span class="align-right">{{ret.driver_name__c}}</span>
+          <span class="card-label">Driver:</span> <span class="align-right">{{ret.Driver_Name__c}}</span>
         </div>
       </ion-card-content>
     </ion-card>

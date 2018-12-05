@@ -48,7 +48,7 @@ export class InTransitPage {
        	this.loading.show();
     	this.storage.get('user').then((user) => {
 	      	this.user = user;
-	      	oppoService.getInTransit(user.sfid)
+	      	oppoService.getInTransit(user.Id)
 	        	.then( data => {
 	          		let res = <any>{};
 			        res = data;
@@ -87,10 +87,10 @@ export class InTransitPage {
   	loadMap(){
   		this.geolocation.getCurrentPosition().then((resp) => {
 		 	var origin = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-		 	this.destination = this.item.receiving_street_address__c + ',' + 
-                this.item.receiving_city__c +  ',' +
-                this.item.receiving_state__c +  ',' +
-                this.item.receiving_zip_code__c ;
+		 	this.destination = this.item.receiving_Street_address__c + ',' + 
+                this.item.receiving_City__c +  ',' +
+                this.item.receiving_State__c +  ',' +
+                this.item.receiving_Zip_code__c ;
 		 	this.map = new google.maps.Map(this.mapElement.nativeElement, {
 		      zoom: 15,
 		      center: origin,
@@ -151,18 +151,32 @@ export class InTransitPage {
 	    }); 
    	}
 
+
    	delivered(){
    		this.loading.show();
 	    var body = { colNames : ['arrival_time__c', 'status__c'],
 	                 vals : [this.helper.formatDate(new Date()), 'Completed']}
 	    for(let i=0;i<this.items.length;i++){
-         	this.oppoService.updateOpportunity(this.items[i].sfid, body)
+         	this.oppoService.updateOpportunity(this.items[i].Id, body)
 		        .then( data => {
-		        	debugger;
 		        	if (i == (this.items.length -1)){
-                        this.transferGPS.stopGPSTracking();
-		          		this.loading.hide();  
-		          		this.navCtrl.setRoot(ItineraryPage, {});  
+                        this.transferGPS.stopGPSTracking()
+                        .then( result => {
+  							this.loading.hide();
+		          			this.navCtrl.setRoot(ItineraryPage, {});  
+				        })
+				        .catch( errorReq => {
+				          	this.loading.hide();  
+				          	var errorObj  = JSON.parse(errorReq._body);
+				          	if (errorObj.message){
+				            	let t = this.toast.create({ message:errorObj.message, 
+				                                duration: 5000, 
+				                                position: 'top',
+				                                showCloseButton: true,
+				                                cssClass: 'toast-error'});
+				            	t.present();
+				           	}
+				        });	  
                   	}
 		        })
 		        .catch( errorReq => {

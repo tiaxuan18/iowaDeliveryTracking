@@ -16,12 +16,14 @@ export class HelperService {
     }
 
  	formatDate(passedDate){
-    	return passedDate.toISOString().slice(0, 19).replace('T', ' ');
+    	return passedDate.toISOString();
+    	//.slice(0, 19).replace('T', ' ');
   	}
 
   	addDateSeconds(passedDate, duration){
   		passedDate.setSeconds(passedDate.getSeconds() + duration);
-    	return passedDate.toISOString().slice(0, 19).replace('T', ' ');
+    	return passedDate.toISOString();
+    	//.slice(0, 19).replace('T', ' ');
   	}
 
   	getTokenHeader(){
@@ -42,6 +44,7 @@ export class HelperService {
 				    		resolve({headers: headerDict});
 		    			},
 		    			error => {
+		    			            debugger;
 				    	 reject(error);
 				  	});
 			    } else {

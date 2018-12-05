@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{item.recipient_company_name__c}}</ion-title>
+    <ion-title>{{item.Recipient_Company_Name__c}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding class="page-transfer-detail">
@@ -11,20 +11,20 @@
     <ion-card-content>
       <!-- <ion-label floating>{{ item.name }}
       </ion-label> -->
-      <ion-label floating>{{ item.receiving_street_address__c }}</ion-label>
-      <ion-label floating>{{ item.receiving_city__c }}, {{ item.receiving_state__c }} {{ item.receiving_zip_code__c }}</ion-label>
+      <ion-label floating>{{ item.receiving_Street_address__c }}</ion-label>
+      <ion-label floating>{{ item.receiving_City__c }}, {{ item.receiving_State__c }} {{ item.receiving_Zip_code__c }}</ion-label>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>Items <span class="label-icon"><ion-icon name="cube"></ion-icon></span>
     </ion-card-header>
     <ion-card-content>
-      <ion-label floating>{{item.product_codes__c}}</ion-label>
+      <ion-label floating>{{item.Product_Codes__c}}</ion-label>
     </ion-card-content>
   </ion-card>
-  <button block ion-button class="btn-default" padding>
+  <!--button block ion-button class="btn-default" padding>
    Cancel
-  </button>
+  </button -->
 </ion-content>
 <ion-footer padding>
   <div>

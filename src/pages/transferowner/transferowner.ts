@@ -40,39 +40,57 @@ export class TransferOwnerPage {
   transferItem(){
     this.loading.show();
     for(let i=0;i<this.transitItems.length;i++){
-      var body = { colNames : ['transfer_ownership_reason__c',"transfer__c"],
-                     vals : [this.transOwnerFrm.value.reason, this.transitItems[i].sfid]}
+      var body = { colNames : ['Transfer_Ownership_Reason__c',"Transfer__c"],
+                     vals : [this.transOwnerFrm.value.reason, this.transitItems[i].Id]}
       if (i == (this.transitItems.length -1)){
-        this.transferGPS.stopGPSTracking();
-      }
-      this.transfer.createTransferOwner(body)
-        .then( data => {
-            this.transferOpportunity();
-        })
-        .catch( errorReq => {
-            this.loading.hide();  
-            var errorObj  = JSON.parse(errorReq._body);
-            if (errorObj.message){
-              let t = this.toast.create({ message:errorObj.message, 
-                                  duration: 5000, 
-                                  position: 'top',
-                                  showCloseButton: true,
-                                  cssClass: 'toast-error'});
-              t.present();
-            }  
+        this.transferGPS.stopGPSTracking().then( result => {
+          this.transferOwner(body);
+        }).catch( errorReq => {
+          this.loading.hide();  
+          var errorObj  = JSON.parse(errorReq._body);
+          if (errorObj.message){
+            let t = this.toast.create({ message:errorObj.message, 
+                                duration: 5000, 
+                                position: 'top',
+                                showCloseButton: true,
+                                cssClass: 'toast-error'});
+            t.present();
+          }  
         });
+      } else {
+      debugger;
+        this.transferOwner(body);
       }
+    }
       
 
+  }
+
+  transferOwner(body){
+    this.transfer.createTransferOwner(body)
+      .then( data => {
+          this.transferOpportunity();
+      })
+      .catch( errorReq => {
+          this.loading.hide();  
+          var errorObj  = JSON.parse(errorReq._body);
+          if (errorObj.message){
+            let t = this.toast.create({ message:errorObj.message, 
+                                duration: 5000, 
+                                position: 'top',
+                                showCloseButton: true,
+                                cssClass: 'toast-error'});
+            t.present();
+          }  
+      });
   }
   	
   transferOpportunity(){
 
     for(let i=0;i<this.transitItems.length;i++){
-      var bodyOppo = { colNames : ['arrival_time__c', 'status__c', 'driver__c'],
-                     vals : [this.helper.formatDate(new Date()), 'Pending', 'NULL']}
-
-      this.oppoService.updateOpportunity(this.transitItems[i].sfid, bodyOppo)
+      var bodyOppo = { colNames : ['Arrival_time__c', 'Status__c', 'Driver__c'],
+                     vals : [this.helper.formatDate(new Date()), 'Pending', 'NULL']}           
+      this.oppoService.updateOpportunity(this.transitItems[i].Id, bodyOppo)
             .then( data => {
               if (i == (this.transitItems.length -1)){
                 this.loading.hide();

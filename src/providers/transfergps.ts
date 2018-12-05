@@ -2,7 +2,6 @@ import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HelperService } from './helper';
@@ -18,7 +17,6 @@ export class TransferGPSService {
     constructor(private httpService: Http,
                 private storage: Storage,
                 private helper: HelperService,
-                private toast : ToastController,
                 private geolocation: Geolocation) {
     	this.transferGPSURL = ServiceSettings.SERVER_URL + '/api/transfergps';
     	
@@ -58,7 +56,7 @@ export class TransferGPSService {
                     }
                     gps.push(resp.coords.latitude);
                     gps.push(resp.coords.longitude);
-                    gps.push(user.sfid);
+                    gps.push(user.Id);
                     gps.push(this.helper.formatDate(new Date()));
                     this.storage.set('gpsData', gps);
                 });
@@ -68,27 +66,24 @@ export class TransferGPSService {
     }
 
     stopGPSTracking() {
-         this.storage.get('intervalID').then((iId) => {
-            clearInterval(iId);
-             this.storage.get('gpsData').then((gps) => {
-                if (gps != null && gps.length > 0){
-                    var body = { colNames : ['latitude__c', 'longitude__c', 'driver__c', 'createddate'],
-                                 vals : gps};
-                    this.createTransferGPS(body).then( data => {
-                        this.storage.remove('gpsData');
-                    })
-                    .catch( errorReq => {
-                          var errorObj  = JSON.parse(errorReq._body);
-                          if (errorObj.message){
-                            let t = this.toast.create({ message:errorObj.message, 
-                                                duration: 5000, 
-                                                position: 'top',
-                                                showCloseButton: true,
-                                                cssClass: 'toast-error'});
-                            t.present();
-                        }
-                    });
-                }
+        return new Promise( (resolve, reject) => {
+             this.storage.get('intervalID').then((iId) => {
+                clearInterval(iId);
+                 this.storage.get('gpsData').then((gps) => {
+                    if (gps != null && gps.length > 0){
+                        var body = { colNames : ['Latitude__c', 'Longitude__c', 'Driver__c', 'Log_Create_Date__c'],
+                                     vals : gps};
+                        this.createTransferGPS(body)
+                            .then( data => {
+                                this.storage.remove('gpsData');
+                                resolve(data);})
+                            .catch( err => {
+                                reject(err);
+                            });
+                    } else {
+                        resolve();
+                    }
+                 });
              });
          });
     }
